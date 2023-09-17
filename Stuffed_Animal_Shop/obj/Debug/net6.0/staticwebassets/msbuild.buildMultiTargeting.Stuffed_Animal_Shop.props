@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Stuffed_Animal_Shop.props" />
+</Project>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Stuffed_Animal_Shop.props" />
+</Project>
