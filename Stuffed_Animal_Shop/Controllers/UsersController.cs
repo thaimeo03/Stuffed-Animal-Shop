@@ -6,17 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Stuffed_Animal_Shop.Data;
+using Stuffed_Animal_Shop.ViewModels;
 using Stuffed_Animal_Shop.Models;
+using Stuffed_Animal_Shop.Services;
 
 namespace Stuffed_Animal_Shop.Controllers
 {
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserService _userService;
 
         public UsersController(ApplicationDbContext context)
         {
             _context = context;
+            _userService = new UserService(context);
         }
 
         // GET: Users
@@ -27,28 +31,10 @@ namespace Stuffed_Animal_Shop.Controllers
                           Problem("Entity set 'ApplicationDbContext.Users'  is null.");
         }
 
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.Users == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
         // GET: Users/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new UserRegister());
         }
 
         // POST: Users/Create
@@ -56,109 +42,29 @@ namespace Stuffed_Animal_Shop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,Email,Password,Name,Role,Address,Avatar")] User user)
+        public async Task<IActionResult> Create(UserRegister userRegister)
         {
-            if (ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
-                Console.WriteLine(user.Role);
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
-        }
-
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null || _context.Users == null)
-            {
-                return NotFound();
+                return View(userRegister);
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            if(_userService.UserExsisted(userRegister.Email))
             {
-                return NotFound();
+                TempData["Error"] = "This email address is already in use";
+                return View(userRegister);
             }
-            return View(user);
-        }
-
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UserId,Email,Password,Name,Role,Address,Avatar")] User user)
-        {
-            if (id != user.UserId)
+                
+            var user = new User()
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.UserId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
-        }
-
-        // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null || _context.Users == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            if (_context.Users == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Users'  is null.");
-            }
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-            }
-            
+                Name = userRegister.Name,
+                Email = userRegister.Email,
+                Password = userRegister.Password
+            };
+            _context.Add(user);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
-        private bool UserExists(string id)
-        {
-          return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
