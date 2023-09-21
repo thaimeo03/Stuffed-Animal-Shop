@@ -70,8 +70,8 @@ namespace Stuffed_Animal_Shop.Controllers
 
             List<Claim> claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Email),
-                //new Claim(ClaimTypes.NameIdentifier, user.Role)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             ClaimsIdentity identity = new ClaimsIdentity(claims, 
