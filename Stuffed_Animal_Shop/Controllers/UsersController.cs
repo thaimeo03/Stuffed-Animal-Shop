@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stuffed_Animal_Shop.Data;
 using Stuffed_Animal_Shop.ViewModels;
 using Stuffed_Animal_Shop.Models;
 using Stuffed_Animal_Shop.Services;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Stuffed_Animal_Shop.Controllers
 {
@@ -33,7 +31,14 @@ namespace Stuffed_Animal_Shop.Controllers
 
         // GET: Users/Create
         public IActionResult Create()
-        {
+        {   
+            ClaimsPrincipal claimUser = HttpContext.User;
+
+            if (claimUser.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View(new UserRegister());
         }
 
@@ -54,7 +59,7 @@ namespace Stuffed_Animal_Shop.Controllers
                 TempData["Error"] = "This email address is already in use";
                 return View(userRegister);
             }
-                
+
             var user = new User()
             {
                 Name = userRegister.Name,
@@ -62,9 +67,28 @@ namespace Stuffed_Animal_Shop.Controllers
                 Password = userRegister.Password
             };
             _context.Add(user);
+
+            List<Claim> claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Email),
+                //new Claim(ClaimTypes.NameIdentifier, user.Role)
+            };
+
+            ClaimsIdentity identity = new ClaimsIdentity(claims, 
+                CookieAuthenticationDefaults.AuthenticationScheme);
+
+            AuthenticationProperties properties = new AuthenticationProperties()
+            {
+                AllowRefresh = true,
+                IsPersistent = userRegister.KeepLogedIn
+            };
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(identity), properties);
+
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
     }
 }

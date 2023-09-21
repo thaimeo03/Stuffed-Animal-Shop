@@ -19,5 +19,7 @@ namespace Stuffed_Animal_Shop.ViewModels
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password do not match")]
         public string ConfirmPassword { get; set; }
+
+        public bool KeepLogedIn { get; set; }
     }
 }
