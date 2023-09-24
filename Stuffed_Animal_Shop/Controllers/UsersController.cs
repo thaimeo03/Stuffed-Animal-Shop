@@ -66,6 +66,8 @@ namespace Stuffed_Animal_Shop.Controllers
                 Email = userRegister.Email,
                 Password = userRegister.Password
             };
+            var cart = new Cart();
+            user.Cart = cart;
             _context.Add(user);
 
             List<Claim> claims = new List<Claim>()

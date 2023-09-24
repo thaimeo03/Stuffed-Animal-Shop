@@ -30,8 +30,6 @@ namespace Stuffed_Animal_Shop.Models
 
         [Column(TypeName = "varchar(300)")]
         public string Avatar { get; set; } = "";
-
-        //[Required]
-        //public Cart Cart { get; set; }
+        public virtual Cart Cart { get; set; }
     }
 }

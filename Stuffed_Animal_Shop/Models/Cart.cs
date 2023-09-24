@@ -7,10 +7,9 @@ namespace Stuffed_Animal_Shop.Models
     {
         [Key]
         [Column(TypeName = "varchar(36)")]
-        public string CartId { get; set; }
+        [ForeignKey("User")]
+        public Guid CartId { get; set; }
 
-        //[ForeignKey("User")]
-        //public string UserId { get; set; }
-        //public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }
