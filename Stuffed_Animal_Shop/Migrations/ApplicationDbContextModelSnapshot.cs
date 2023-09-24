@@ -24,8 +24,8 @@ namespace Stuffed_Animal_Shop.Migrations
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
                 {
-                    b.Property<string>("CartId")
-                        .HasColumnType("varchar(36)");
+                    b.Property<Guid>("CartId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CartId");
 

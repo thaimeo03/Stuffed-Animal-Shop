@@ -12,8 +12,8 @@ using Stuffed_Animal_Shop.Data;
 namespace Stuffed_Animal_Shop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230924033910_Add_forerignKkey_user_and_cart_test")]
-    partial class Add_forerignKkey_user_and_cart_test
+    [Migration("20230924061530_create_user_and_cart_tables")]
+    partial class create_user_and_cart_tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,8 @@ namespace Stuffed_Animal_Shop.Migrations
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
                 {
-                    b.Property<string>("CartId")
-                        .HasColumnType("varchar(36)");
+                    b.Property<Guid>("CartId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CartId");
 

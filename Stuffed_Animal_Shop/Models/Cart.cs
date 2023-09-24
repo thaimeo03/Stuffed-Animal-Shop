@@ -6,7 +6,7 @@ namespace Stuffed_Animal_Shop.Models
     public class Cart
     {
         [Key]
-        [Column(TypeName = "varchar(36)")]
+        [Column(TypeName = "uniqueidentifier")]
         [ForeignKey("User")]
         public Guid CartId { get; set; }
 
