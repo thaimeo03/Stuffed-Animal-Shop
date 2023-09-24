@@ -1,6 +1,9 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using NuGet.Packaging;
 using Stuffed_Animal_Shop.Data;
+using Stuffed_Animal_Shop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +17,15 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+var serviceProvider = new ServiceCollection().AddDbContext<ApplicationDbContext>
+    (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))).BuildServiceProvider();
+
+var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
+var seedData = new SeedData(context);
+seedData.GenerateFakeUserWithCart(10); // Tạo 10 người dùng giả mạo có giỏ hàng
 
 var app = builder.Build();
 

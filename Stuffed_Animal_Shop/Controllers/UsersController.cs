@@ -31,7 +31,7 @@ namespace Stuffed_Animal_Shop.Controllers
 
         // GET: Users/Create
         public IActionResult Create()
-        {   
+        {
             ClaimsPrincipal claimUser = HttpContext.User;
 
             if (claimUser.Identity.IsAuthenticated)

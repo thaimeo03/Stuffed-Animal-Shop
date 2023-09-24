@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "VwKPTplLZE9JOwwMNn+p5yCOQf2pa1ijwdrUO/t1TncoGKSUR+4yNjKmCRaaLlPcafMXCTrMGkPGMgAxI59Svw==",
+  "dgSpecHash": "LY+ee3UQavl2gkwrDBFGXpD6Ch4OACw/oLHG/t0/tQvISbbe9dEStOYJ+HiU2IX6M6chara9M9TLpbZn53SO9Q==",
   "success": true,
   "projectFilePath": "E:\\ASP.NET\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thait\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\thait\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\thait\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
     "C:\\Users\\thait\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\thait\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\thait\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",
