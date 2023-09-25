@@ -15,10 +15,11 @@ namespace Stuffed_Animal_Shop.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserService _userService;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _userService = new UserService(context);
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Users
