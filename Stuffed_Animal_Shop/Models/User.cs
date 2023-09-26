@@ -37,7 +37,7 @@ namespace Stuffed_Animal_Shop.Models
         [Column(TypeName = "varchar(300)")]
         public string Avatar { get; set; } = "";
 
-        [Column(TypeName = "")]
+        [Column(TypeName = "datetime")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [Column(TypeName = "datetime")]

@@ -16,6 +16,7 @@ namespace Stuffed_Animal_Shop.Models
         public Guid CartId { get; set; }
 
         public virtual User User { get; set; }
+        public virtual Order Order { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
 }

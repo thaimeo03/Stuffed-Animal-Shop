@@ -8,6 +8,7 @@ namespace Stuffed_Animal_Shop.Models
         [Key]
         [Column(TypeName = "uniqueidentifier")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [ForeignKey("Cart")]
         public Guid OrderId { get; set; }
 
         [Required]
@@ -23,5 +24,7 @@ namespace Stuffed_Animal_Shop.Models
 
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+        public virtual Cart Cart { get; set; }
     }
 }

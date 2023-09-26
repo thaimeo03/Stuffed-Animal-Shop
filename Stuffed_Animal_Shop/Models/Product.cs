@@ -8,7 +8,6 @@ namespace Stuffed_Animal_Shop.Models
         public Product() {
             this.Categories = new HashSet<Category>();
             this.Carts = new HashSet<Cart>();
-            this.Orders = new HashSet<Order>();
         }
 
         [Key]
@@ -56,6 +55,5 @@ namespace Stuffed_Animal_Shop.Models
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

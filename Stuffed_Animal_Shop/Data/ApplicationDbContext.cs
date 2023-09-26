@@ -14,5 +14,7 @@ namespace Stuffed_Animal_Shop.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Order> Orders { get; set; }
+        
+        public DbSet<Image> Images { get; set; }
     }
 }

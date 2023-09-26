@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stuffed_Animal_Shop.Data;
 
@@ -11,9 +12,11 @@ using Stuffed_Animal_Shop.Data;
 namespace Stuffed_Animal_Shop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230926164434_add_image_table")]
+    partial class add_image_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,6 +122,9 @@ namespace Stuffed_Animal_Shop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
@@ -127,6 +133,8 @@ namespace Stuffed_Animal_Shop.Migrations
                         .HasColumnType("datetime");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Orders");
                 });
@@ -305,13 +313,9 @@ namespace Stuffed_Animal_Shop.Migrations
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Order", b =>
                 {
-                    b.HasOne("Stuffed_Animal_Shop.Models.Cart", "Cart")
-                        .WithOne("Order")
-                        .HasForeignKey("Stuffed_Animal_Shop.Models.Order", "OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
+                    b.HasOne("Stuffed_Animal_Shop.Models.Product", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Review", b =>
@@ -325,10 +329,9 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Product", b =>
                 {
-                    b.Navigation("Order")
-                        .IsRequired();
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.User", b =>
