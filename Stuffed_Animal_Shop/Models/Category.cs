@@ -5,6 +5,11 @@ namespace Stuffed_Animal_Shop.Models
 {
     public class Category
     {
+        public Category()
+        {
+            this.Products = new HashSet<Product>();
+        }
+
         [Key]
         [Column(TypeName = "uniqueidentifier")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,5 +22,7 @@ namespace Stuffed_Animal_Shop.Models
 
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

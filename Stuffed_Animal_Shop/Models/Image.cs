@@ -19,5 +19,7 @@ namespace Stuffed_Animal_Shop.Models
 
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+        public Product Product { get; set; }
     }
 }

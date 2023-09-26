@@ -29,7 +29,7 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasKey("CartId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.User", b =>
@@ -64,7 +64,7 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
