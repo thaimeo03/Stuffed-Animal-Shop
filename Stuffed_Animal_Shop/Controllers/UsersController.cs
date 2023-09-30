@@ -21,16 +21,8 @@ namespace Stuffed_Animal_Shop.Controllers
             _userService = new UserService(context);
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
-        {
-              return _context.Users != null ? 
-                          View(await _context.Users.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Users'  is null.");
-        }
-
-        // GET: Users/Create
-        public IActionResult Create()
+        // GET: Users/Register
+        public IActionResult Register()
         {
             ClaimsPrincipal claimUser = HttpContext.User;
 
@@ -42,12 +34,12 @@ namespace Stuffed_Animal_Shop.Controllers
             return View(new UserRegister());
         }
 
-        // POST: Users/Create
+        // POST: Users/Register
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UserRegister userRegister)
+        public async Task<IActionResult> Register(UserRegister userRegister)
         {
             if(!ModelState.IsValid)
             {
@@ -91,6 +83,11 @@ namespace Stuffed_Animal_Shop.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Login()
+        {
+            return View();
         }
     }
 }
