@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Stuffed_Animal_Shop.Controllers
 {
-    [Authorize(Roles = "User")]
+    //[Authorize(Roles = "Admin, User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
