@@ -89,5 +89,13 @@ namespace Stuffed_Animal_Shop.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(UserLogin userLogin)
+        {
+            Console.WriteLine(userLogin.Email + userLogin.Password);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
