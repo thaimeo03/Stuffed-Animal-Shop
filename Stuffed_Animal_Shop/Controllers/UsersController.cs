@@ -21,6 +21,26 @@ namespace Stuffed_Animal_Shop.Controllers
             _userService = new UserService(context);
         }
 
+        private async void Auth(string Email, string Role)
+        {
+            List<Claim> claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Email, Email),
+                new Claim(ClaimTypes.Role, Role)
+            };
+
+            ClaimsIdentity identity = new ClaimsIdentity(claims,
+                CookieAuthenticationDefaults.AuthenticationScheme);
+
+            AuthenticationProperties properties = new AuthenticationProperties()
+            {
+                AllowRefresh = true,
+            };
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(identity), properties);
+        }
+
         // GET: Users/Register
         public IActionResult Register()
         {
@@ -62,23 +82,7 @@ namespace Stuffed_Animal_Shop.Controllers
             user.Cart = cart;
             _context.Add(user);
 
-            List<Claim> claims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role)
-            };
-
-            ClaimsIdentity identity = new ClaimsIdentity(claims, 
-                CookieAuthenticationDefaults.AuthenticationScheme);
-
-            AuthenticationProperties properties = new AuthenticationProperties()
-            {
-                AllowRefresh = true,
-                IsPersistent = userRegister.KeepLogedIn
-            };
-
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(identity), properties);
+            this.Auth(user.Email, user.Role);
 
             await _context.SaveChangesAsync();
 
@@ -95,6 +99,22 @@ namespace Stuffed_Animal_Shop.Controllers
         public async Task<IActionResult> Login(UserLogin userLogin)
         {
             Console.WriteLine(userLogin.Email + " " + userLogin.Password);
+
+            if (!ModelState.IsValid)
+            {
+                return View(userLogin);
+            }
+
+            var user = _userService.AccountExsited(userLogin.Email, userLogin.Password);
+            if (user == null)
+            {
+                Console.WriteLine("NOooo");
+                TempData["Error"] = "Email or password is incorrect";
+                return View(userLogin);
+            }
+
+            this.Auth(user.Email, user.Role);
+
             return RedirectToAction("Index", "Home");
         }
     }
