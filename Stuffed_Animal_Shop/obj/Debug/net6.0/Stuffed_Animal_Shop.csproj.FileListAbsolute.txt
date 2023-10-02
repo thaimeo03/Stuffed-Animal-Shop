@@ -588,3 +588,4 @@ E:\C#\Stuff_animal_shop\Stuffed_Animal_Shop\obj\Debug\net6.0\refint\Stuffed_Anim
 E:\C#\Stuff_animal_shop\Stuffed_Animal_Shop\obj\Debug\net6.0\Stuffed_Animal_Shop.pdb
 E:\C#\Stuff_animal_shop\Stuffed_Animal_Shop\obj\Debug\net6.0\Stuffed_Animal_Shop.genruntimeconfig.cache
 E:\C#\Stuff_animal_shop\Stuffed_Animal_Shop\obj\Debug\net6.0\ref\Stuffed_Animal_Shop.dll
+E:\ASP.NET\Stuffed_Animal_Shop\Stuffed_Animal_Shop\bin\Debug\net6.0\CloudinaryDotNet.dll
