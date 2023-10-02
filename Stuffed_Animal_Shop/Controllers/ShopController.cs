@@ -11,8 +11,10 @@ namespace Stuffed_Animal_Shop.Controllers
             return View();
         }
 
-        public IActionResult Detail()
+        //[Route("/shop/detail/{productId}")]
+        public IActionResult Detail([FromRoute] string productId)
         {
+            //Console.WriteLine(productId);
             return View();
         }
 
