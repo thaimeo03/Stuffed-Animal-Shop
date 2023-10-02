@@ -3,13 +3,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NuGet.Packaging;
 using Stuffed_Animal_Shop.Data;
+using Stuffed_Animal_Shop.Interfaces;
 using Stuffed_Animal_Shop.Models;
+using Stuffed_Animal_Shop.Services;
+using Stuffed_Animal_Shop.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.Configure<CloudinarySetting>(builder.Configuration.GetSection("CloudinarySettings"));
+builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(option =>
     {
