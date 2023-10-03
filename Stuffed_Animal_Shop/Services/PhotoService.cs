@@ -1,12 +1,11 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Options;
-using Stuffed_Animal_Shop.Interfaces;
 using Stuffed_Animal_Shop.Utilities;
 
 namespace Stuffed_Animal_Shop.Services
 {
-    public class PhotoService : IPhotoService
+    public class PhotoService
     {
         private readonly Cloudinary _cloudinary;
         public PhotoService(IOptions<CloudinarySetting> config)
@@ -19,7 +18,7 @@ namespace Stuffed_Animal_Shop.Services
             _cloudinary = new Cloudinary( acc );
         }
 
-        public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
+        public string AddPhotoAsync(IFormFile file)
         {
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
@@ -33,8 +32,31 @@ namespace Stuffed_Animal_Shop.Services
                 uploadResult = _cloudinary.Upload(uploadParams);
             }
 
-            return uploadResult;
+            return uploadResult.Url.ToString();
         }
+
+        public List<string> AddPhotosAsync(List<IFormFile> files)
+        {
+            List<string> uploadResults = new List<string>();
+
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    using var stream = file.OpenReadStream();
+                    var uploadParams = new ImageUploadParams
+                    {
+                        File = new FileDescription(file.FileName, stream),
+                        Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")
+                    };
+                    var uploadResult = _cloudinary.Upload(uploadParams);
+                    uploadResults.Add(uploadResult.Url.ToString());
+                }
+            }
+
+            return uploadResults;
+        }
+
 
         public Task<DeletionResult> DeletePhotoAsync(string publicId)
         {

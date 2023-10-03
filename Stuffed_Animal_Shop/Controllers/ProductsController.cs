@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bogus.DataSets;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Stuffed_Animal_Shop.Data;
-using Stuffed_Animal_Shop.Interfaces;
 using Stuffed_Animal_Shop.Models;
+using Stuffed_Animal_Shop.Services;
+using Stuffed_Animal_Shop.Utilities;
 using Stuffed_Animal_Shop.ViewModels;
 
 namespace Stuffed_Animal_Shop.Controllers
@@ -15,12 +18,12 @@ namespace Stuffed_Animal_Shop.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IPhotoService _photoService;
+        private readonly PhotoService _photoService;
 
-        public ProductsController(ApplicationDbContext context, IPhotoService photoService)
+        public ProductsController(ApplicationDbContext context, IOptions<CloudinarySetting> config)
         {
             _context = context;
-            _photoService = photoService;
+            _photoService = new PhotoService(config);
         }
 
         // GET: Products
@@ -64,7 +67,7 @@ namespace Stuffed_Animal_Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _photoService.AddPhotoAsync(createProduct.MainImage);
+                string image = _photoService.AddPhotoAsync(createProduct.MainImage);
                 var product = new Product()
                 {
                     Name = createProduct.Name,
@@ -73,9 +76,23 @@ namespace Stuffed_Animal_Shop.Controllers
                     Color = createProduct.Color,
                     Quantity = createProduct.Quantity,
                     Description = createProduct.Description,
-                    MainImage = result.Url.ToString(),
+                    MainImage = image,
                 };
+
+                List<string> images = _photoService.AddPhotosAsync(createProduct.Images);
+                var listImagesProduct = new List<Image>();
+                for(int i = 0; i < images.Count(); i++)
+                {
+                    var newImage = new Image()
+                    {
+                        ImageUrl = images[i],
+                        Product = product
+                    };
+                    listImagesProduct.Add(newImage);
+                }
+
                 _context.Add(product);
+                _context.AddRange(listImagesProduct);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
