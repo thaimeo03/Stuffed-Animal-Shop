@@ -15,5 +15,7 @@
         public string Description { get; set; }
 
         public IFormFile MainImage { get; set; }
+
+        public List<IFormFile> Images { get; set; }
     }
 }
