@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bogus.DataSets;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,8 @@ namespace Stuffed_Animal_Shop.Controllers
             _photoService = new PhotoService(config);
         }
 
+        [Authorize(Roles = "User")] // Change role to admin
+        [Route("admin/products")]
         // GET: Products
         public async Task<IActionResult> Index()
         {
@@ -52,16 +55,15 @@ namespace Stuffed_Animal_Shop.Controllers
             return View(product);
         }
 
+        [Route("admin/products/create")]
         // GET: Products/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        
+        [HttpPost("admin/products/create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateProduct createProduct)
         {
@@ -99,6 +101,7 @@ namespace Stuffed_Animal_Shop.Controllers
             return View(createProduct);
         }
 
+        [Route("admin/products/edit")]
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
