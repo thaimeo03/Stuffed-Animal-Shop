@@ -12,9 +12,15 @@ namespace Stuffed_Animal_Shop.Services
             this._context = context;
         }
 
-        public List<Image> GetImages(string productId)
+        public List<Image> GetImages(Guid productId)
         {
-            return this._context.Images.Where(i => i.Product.ProductId.ToString() == productId).ToList();
+            Console.WriteLine(productId);
+            return this._context.Images.Where(i => i.Product.ProductId == productId).ToList();
+        }
+
+        public bool ProductExists(Guid id)
+        {
+            return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
         }
     }
 }
