@@ -77,5 +77,16 @@ namespace Stuffed_Animal_Shop.Services
 
             return deleteResults;
         }
+
+        public string GetPublicId(string imageUrl)
+        {
+            // Tách đường dẫn hình ảnh thành mảng các phần bằng "/"
+            string[] urlParts = imageUrl.Split('/');
+
+            // Lấy phần tử cuối cùng trong mảng (phần ID mong muốn)
+            string imageId = urlParts.LastOrDefault().Split('.')[0];
+
+            return imageId;
+        }
     }
 }

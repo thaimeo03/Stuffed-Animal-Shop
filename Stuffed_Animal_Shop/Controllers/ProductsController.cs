@@ -16,6 +16,7 @@ using Stuffed_Animal_Shop.ViewModels;
 
 namespace Stuffed_Animal_Shop.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,11 +27,11 @@ namespace Stuffed_Animal_Shop.Controllers
         {
             _context = context;
             _photoService = new PhotoService(config);
+            _productService = new ProductService(context);
         }
-
-        [Authorize(Roles = "User")] // Change role to admin
-        [Route("admin/products")]
+        
         // GET: Products
+        [Route("admin/products")]
         public async Task<IActionResult> Index()
         {
               return _context.Products != null ? 
@@ -44,7 +45,6 @@ namespace Stuffed_Animal_Shop.Controllers
         {
             return View();
         }
-
         
         [HttpPost("admin/products/create")]
         [ValidateAntiForgeryToken]
@@ -84,60 +84,61 @@ namespace Stuffed_Animal_Shop.Controllers
             return View(createProduct);
         }
 
-        [Route("admin/products/edit")]
-        // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null || _context.Products == null)
-            {
-                return NotFound();
-            }
+        //[Route("admin/products/edit")]
+        //// GET: Products/Edit/5
+        //public async Task<IActionResult> Edit(Guid? id)
+        //{
+        //    if (id == null || _context.Products == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
-        }
+        //    var product = await _context.Products.FindAsync(id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(product);
+        //}
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ProductId,Name,Price,Size,Color,Quantity,Sold,Description,MainImage,CreatedAt,UpdatedAt")] Product product)
-        {
-            if (id != product.ProductId)
-            {
-                return NotFound();
-            }
+        //// POST: Products/Edit/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to.
+        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(Guid id, [Bind("ProductId,Name,Price,Size,Color,Quantity,Sold,Description,MainImage,CreatedAt,UpdatedAt")] Product product)
+        //{
+        //    if (id != product.ProductId)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.ProductId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(product);
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(product);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!this._productService.ProductExists(product.ProductId))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(product);
+        //}
+
 
         // GET: Products/Delete/5
-        [Route("admin/products/delete")]
+        [Route("admin/products/delete/{id}")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Products == null)
@@ -156,23 +157,26 @@ namespace Stuffed_Animal_Shop.Controllers
         }
 
         // POST: Products/Delete/5
-        [HttpPost("admin/products/delete"), ActionName("Delete")]
+        [HttpPost("admin/products/delete/{id}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             Console.WriteLine(id);
             if (_context.Products == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Products'  is null.");
             }
-            var product = await _context.Products.FindAsync(Guid.Parse(id));
+            var product = await _context.Products.FindAsync(id);
 
-            // Delete images in cloudinary
+            //Delete images in cloudinary
+            var mainImagePublicId = this._photoService.GetPublicId(product.MainImage);
+            Console.WriteLine(mainImagePublicId);
             var images = this._productService.GetImages(id);
-            var productImageIds = new List<string>();
-            foreach(var image in images)
+            var imageListPublicIds = new List<string>();
+            foreach (var image in images)
             {
-                productImageIds.Add(image.ImageId.ToString());
+                var publicId = this._photoService.GetPublicId(image.ImageUrl);
+                imageListPublicIds.Add(publicId);
             }
 
             if (product != null)
@@ -181,16 +185,13 @@ namespace Stuffed_Animal_Shop.Controllers
             }
 
 
-            await this._photoService.DeletePhotoAsync(product.MainImage);
-            await this._photoService.DeletePhotosAsync(productImageIds);
+            await this._photoService.DeletePhotoAsync(mainImagePublicId);
+            await this._photoService.DeletePhotosAsync(imageListPublicIds);
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(Guid id)
-        {
-          return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
-        }
+        
     }
 }
