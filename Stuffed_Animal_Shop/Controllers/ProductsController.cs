@@ -20,6 +20,7 @@ namespace Stuffed_Animal_Shop.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly PhotoService _photoService;
+        private readonly ProductService _productService;
 
         public ProductsController(ApplicationDbContext context, IOptions<CloudinarySetting> config)
         {
@@ -37,24 +38,6 @@ namespace Stuffed_Animal_Shop.Controllers
                           Problem("Entity set 'ApplicationDbContext.Products'  is null.");
         }
 
-        // GET: Products/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null || _context.Products == null)
-            {
-                return NotFound();
-            }
-
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductId == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
-        }
-
         [Route("admin/products/create")]
         // GET: Products/Create
         public IActionResult Create()
@@ -69,7 +52,7 @@ namespace Stuffed_Animal_Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-                string image = _photoService.AddPhotoAsync(createProduct.MainImage);
+                var image = _photoService.AddPhotoAsync(createProduct.MainImage);
                 var product = new Product()
                 {
                     Name = createProduct.Name,
@@ -78,16 +61,16 @@ namespace Stuffed_Animal_Shop.Controllers
                     Color = createProduct.Color,
                     Quantity = createProduct.Quantity,
                     Description = createProduct.Description,
-                    MainImage = image,
+                    MainImage = image.Url.ToString(),
                 };
 
-                List<string> images = _photoService.AddPhotosAsync(createProduct.Images);
+                var images = _photoService.AddPhotosAsync(createProduct.Images);
                 var listImagesProduct = new List<Image>();
                 for(int i = 0; i < images.Count(); i++)
                 {
                     var newImage = new Image()
                     {
-                        ImageUrl = images[i],
+                        ImageUrl = images[i].Url.ToString(),
                         Product = product
                     };
                     listImagesProduct.Add(newImage);
@@ -154,6 +137,7 @@ namespace Stuffed_Animal_Shop.Controllers
         }
 
         // GET: Products/Delete/5
+        [Route("admin/products/delete")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Products == null)
@@ -172,20 +156,34 @@ namespace Stuffed_Animal_Shop.Controllers
         }
 
         // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("admin/products/delete"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            Console.WriteLine(id);
             if (_context.Products == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Products'  is null.");
             }
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.FindAsync(Guid.Parse(id));
+
+            // Delete images in cloudinary
+            var images = this._productService.GetImages(id);
+            var productImageIds = new List<string>();
+            foreach(var image in images)
+            {
+                productImageIds.Add(image.ImageId.ToString());
+            }
+
             if (product != null)
             {
                 _context.Products.Remove(product);
             }
-            
+
+
+            await this._photoService.DeletePhotoAsync(product.MainImage);
+            await this._photoService.DeletePhotosAsync(productImageIds);
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
