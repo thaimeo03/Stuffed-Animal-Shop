@@ -18,7 +18,7 @@ namespace Stuffed_Animal_Shop.Services
             _cloudinary = new Cloudinary( acc );
         }
 
-        public string AddPhotoAsync(IFormFile file)
+        public UploadResult AddPhotoAsync(IFormFile file)
         {
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
@@ -32,12 +32,12 @@ namespace Stuffed_Animal_Shop.Services
                 uploadResult = _cloudinary.Upload(uploadParams);
             }
 
-            return uploadResult.Url.ToString();
+            return uploadResult;
         }
 
-        public List<string> AddPhotosAsync(List<IFormFile> files)
+        public List<UploadResult> AddPhotosAsync(List<IFormFile> files)
         {
-            List<string> uploadResults = new List<string>();
+            List<UploadResult> uploadResults = new List<UploadResult>();
 
             foreach (var file in files)
             {
@@ -50,7 +50,7 @@ namespace Stuffed_Animal_Shop.Services
                         Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")
                     };
                     var uploadResult = _cloudinary.Upload(uploadParams);
-                    uploadResults.Add(uploadResult.Url.ToString());
+                    uploadResults.Add(uploadResult);
                 }
             }
 
@@ -62,6 +62,20 @@ namespace Stuffed_Animal_Shop.Services
         {
             var deleteParams = new DeletionParams(publicId);
             return _cloudinary.DestroyAsync(deleteParams);
+        }
+
+        public async Task<List<DeletionResult>> DeletePhotosAsync(List<string> publicIds)
+        {
+            var deleteResults = new List<DeletionResult>();
+
+            foreach (var publicId in publicIds)
+            {
+                var deleteParams = new DeletionParams(publicId);
+                var deletionResult = await _cloudinary.DestroyAsync(deleteParams);
+                deleteResults.Add(deletionResult);
+            }
+
+            return deleteResults;
         }
     }
 }
