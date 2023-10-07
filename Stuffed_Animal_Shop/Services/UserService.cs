@@ -20,5 +20,10 @@ namespace Stuffed_Animal_Shop.Services
         {
             return _context.Users.Where(u => u.Email == email && u.Password == password).FirstOrDefault();
         }
+
+        public User GetUserByEmail (string email)
+        {
+            return _context.Users.FirstOrDefault(u => u.Email == email);
+        }
     }
 }

@@ -140,8 +140,28 @@
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
+                            @{
+                                if (ViewBag.User == null)
+                                {
+                                    <a href="" class="nav-item nav-link">Login</a>
+                                    <a href="" class="nav-item nav-link">Register</a>
+                                }
+                                else
+                                {
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link" data-toggle="dropdown">
+                                            <div class="d-flex gap-2 align-items-center text-black p-0" style="font-size: 16px">
+                                                <span>@ViewBag.User.Name</span>
+                                                <img src="@ViewBag.User.Avatar" class="rounded-circle" style="width: 42px; height: 42px; object-fit: cover" alt="" />
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu position-absolute border-0 rounded-2 top-50 w-100 m-0" style="background: pink; transform: translateY(30%);">
+                                            <a href="/profile/@ViewBag.User.UserId" class="dropdown-item" style="color: black;">Profile</a>
+                                            <a href="" class="dropdown-item" style="color: black;">Log out</a>
+                                        </div>
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
                 </nav>
@@ -150,16 +170,21 @@
     </div>
     <!-- Navbar End -->
     <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5">
-        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">@ViewData["Hero"]</h1>
-            <div class="d-inline-flex">
-                <p class="m-0"><a href="">Home</a></p>
-                <p class="m-0 px-2">-</p>
-                <p class="m-0">@ViewData["Hero"]</p>
+    @{
+        if(ViewData["Hero"] != null)
+        {
+            <div class="container-fluid bg-secondary mb-5">
+                <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+                    <h1 class="font-weight-semi-bold text-uppercase mb-3">@ViewData["Hero"]</h1>
+                    <div class="d-inline-flex">
+                        <p class="m-0"><a href="">Home</a></p>
+                        <p class="m-0 px-2">-</p>
+                        <p class="m-0">@ViewData["Hero"]</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        }
+    }
     <!-- Page Header End -->
     @RenderBody()
 
