@@ -22,6 +22,9 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="~/css/style.css" rel="stylesheet">
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
     <!-- Topbar Start -->
@@ -154,7 +157,17 @@
                                         <a href="#" class="nav-link" data-toggle="dropdown">
                                             <div class="d-flex gap-2 align-items-center text-black p-0" style="font-size: 16px">
                                                 <span>@ViewBag.User.Name</span>
-                                                <img src="@ViewBag.User.Avatar" class="rounded-circle" style="width: 42px; height: 42px; object-fit: cover" alt="" />
+                                                @{
+                                                    if (@ViewBag.User.Avatar != "")
+                                                    {
+                                                        
+                                                        <img src="@ViewBag.User.Avatar" class="rounded-circle" style="width: 42px; height: 42px; object-fit: cover" alt="" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="bi bi-person-circle" style="font-size: 38px"></i>
+                                                    }
+                                                }
                                             </div>
                                         </a>
                                         <div class="dropdown-menu position-absolute border-0 rounded-2 top-50 w-100 m-0" style="background: pink; transform: translateY(30%);">
