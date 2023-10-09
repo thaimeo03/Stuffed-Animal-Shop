@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AGuBvtFYlFxSFPVqAsH+9jzASG0X2uvXPW3gWh/5vc8HwSI9SLL97MiRbZWe26Pk3iRGnkSNwzxCfsW7mXa7gQ==",
+  "dgSpecHash": "RYG6SMn0oFC55Zf5Buyx92wZvAyW9HZUDI7UrbwVWkC3ASWn10DXuP7UyFQGjnI6qkelU2DV/8HIR+uhjeby+g==",
   "success": true,
-  "projectFilePath": "E:\\ASP.NET\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
+  "projectFilePath": "E:\\C#\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thait\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\thait\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
