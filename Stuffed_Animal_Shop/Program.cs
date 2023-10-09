@@ -6,6 +6,7 @@ using Stuffed_Animal_Shop.Data;
 using Stuffed_Animal_Shop.Models;
 using Stuffed_Animal_Shop.Services;
 using Stuffed_Animal_Shop.Utilities;
+using Stuffed_Animal_Shop.ViewComponents;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddTransient<ReviewViewComponent>();
 
 var serviceProvider = new ServiceCollection().AddDbContext<ApplicationDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))).BuildServiceProvider();
