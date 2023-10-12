@@ -886,3 +886,11 @@ E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\obj\Debug\net6.0\refint\Stuffed_An
 E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\obj\Debug\net6.0\Stuffed_Animal_Shop.pdb
 E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\obj\Debug\net6.0\Stuffed_Animal_Shop.genruntimeconfig.cache
 E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\obj\Debug\net6.0\ref\Stuffed_Animal_Shop.dll
+E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\bin\Debug\net6.0\MailKit.dll
+E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\bin\Debug\net6.0\MimeKit.dll
+E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\bin\Debug\net6.0\System.Formats.Asn1.dll
+E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+E:\C#\Stuffed_Animal_Shop\Stuffed_Animal_Shop\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
