@@ -40,10 +40,16 @@ namespace Stuffed_Animal_Shop.Controllers
         [Route("/shop/detail/{productId}")]
         public IActionResult Detail([FromRoute] string productId)
         {
-            var product = _context.Products.Where(p => p.ProductId == Guid.Parse(productId)).FirstOrDefault();
-            var reviews = _context.Reviews.Where(r => r.Product.ProductId == Guid.Parse(productId)).ToList();
+            var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
 
-            return View("Detail", product);
+            var user = this._userService.GetUserByEmail(userEmail);
+
+            if (user != null)
+            {
+                ViewBag.User = user;
+            }
+
+            return View(user);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

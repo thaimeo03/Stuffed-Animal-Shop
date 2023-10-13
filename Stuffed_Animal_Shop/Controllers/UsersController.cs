@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stuffed_Animal_Shop.Data;
-using Stuffed_Animal_Shop.ViewModels;
 using Stuffed_Animal_Shop.Models;
 using Stuffed_Animal_Shop.Services;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Stuffed_Animal_Shop.ViewModels.Users;
 
 namespace Stuffed_Animal_Shop.Controllers
 {
