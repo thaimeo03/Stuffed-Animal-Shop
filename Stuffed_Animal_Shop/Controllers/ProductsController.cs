@@ -12,7 +12,7 @@ using Stuffed_Animal_Shop.Data;
 using Stuffed_Animal_Shop.Models;
 using Stuffed_Animal_Shop.Services;
 using Stuffed_Animal_Shop.Utilities;
-using Stuffed_Animal_Shop.ViewModels;
+using Stuffed_Animal_Shop.ViewModels.Products;
 
 namespace Stuffed_Animal_Shop.Controllers
 {
@@ -27,7 +27,7 @@ namespace Stuffed_Animal_Shop.Controllers
         {
             _context = context;
             _photoService = new PhotoService(config);
-            _productService = new ProductService(context);
+            _productService = new ProductService(context, _photoService);
         }
         
         // GET: Products
@@ -79,62 +79,85 @@ namespace Stuffed_Animal_Shop.Controllers
                 _context.Add(product);
                 _context.AddRange(listImagesProduct);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(createProduct);
         }
 
-        //[Route("admin/products/edit")]
-        //// GET: Products/Edit/5
-        //public async Task<IActionResult> Edit(Guid? id)
-        //{
-        //    if (id == null || _context.Products == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [Route("admin/products/edit/{id}")]
+        public async Task<IActionResult> Edit(Guid? id)
+        {
+            if (id == null || _context.Products == null)
+            {
+                return NotFound();
+            }
 
-        //    var product = await _context.Products.FindAsync(id);
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(product);
-        //}
+            var product = await _context.Products
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var editProduct = new EditProduct()
+            {
+                Name = product.Name,
+                Price = product.Price,
+                Size = product.Size,
+                Color = product.Color,
+                Quantity = product.Quantity,
+                Description = product.Description,
+            };
+
+            return View(editProduct);
+        }
 
         //// POST: Products/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(Guid id, [Bind("ProductId,Name,Price,Size,Color,Quantity,Sold,Description,MainImage,CreatedAt,UpdatedAt")] Product product)
-        //{
-        //    if (id != product.ProductId)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost("admin/products/edit/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, EditProduct editProduct)
+        {
+            var productCurrent = this._productService.GetProductById(id);
+            Console.WriteLine(editProduct.Name + " " + editProduct.MainImage);
+            if (productCurrent == null)
+            {
+                return NotFound();
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(product);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!this._productService.ProductExists(product.ProductId))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(product);
-        //}
+            if (ModelState.IsValid)
+            {
+                // Delete main image and subimages of old product in cloudinary, database
+                if (editProduct.MainImage != null)
+                {
+                    var mainImagePublicId = this._photoService.GetPublicId(imageUrl: productCurrent.MainImage);
+                    await this._photoService.DeletePhotoAsync(mainImagePublicId);
+                }
+
+                if (editProduct.Images != null)
+                {
+                    var images = this._productService.GetImages(productId: id);
+                    Console.WriteLine(images[0].ImageUrl);
+                    var imageListPublicIds = new List<string>();
+                    foreach (var image in images)
+                    {
+                        var publicId = this._photoService.GetPublicId(image.ImageUrl);
+                        imageListPublicIds.Add(publicId);
+                    }
+                    await this._photoService.DeletePhotosAsync(imageListPublicIds);
+                    _context.RemoveRange(images);
+                }
+
+                // Update new prouct
+                _productService.UpdateProduct(product: productCurrent, editProduct: editProduct);
+
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(editProduct);
+        }
 
 
         // GET: Products/Delete/5
