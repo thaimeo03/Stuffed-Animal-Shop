@@ -14,11 +14,13 @@ namespace Stuffed_Animal_Shop.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserService _userService;
+        private readonly EmailService _emailService;
 
         public UsersController(ApplicationDbContext context)
         {
             _context = context;
             _userService = new UserService(context);
+            _emailService = new EmailService();
         }
 
         private async void Auth(string Email, string Role)
@@ -90,7 +92,14 @@ namespace Stuffed_Animal_Shop.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // Get: Users/login
         public IActionResult Login()
+        {
+            return View();
+        }
+
+        // Get: Users/forgotpassword
+        public IActionResult ForgotPassword()
         {
             return View();
         }
@@ -117,6 +126,31 @@ namespace Stuffed_Animal_Shop.Controllers
             this.Auth(user.Email, user.Role);
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPassword forgotPassword)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(forgotPassword);
+            }
+
+            var user = _userService.GetUserByEmail(forgotPassword.Email);
+
+            if (user == null)
+            {
+                TempData["Error"] = "Email is incorrect";
+                return View(forgotPassword);
+            }
+
+            string newPassword = _userService.ResetPassword(user.Email);
+
+            Console.WriteLine(newPassword);
+
+            _emailService.SendEmail(user.Email, "New password", newPassword);
+            return RedirectToAction("Login", "Users");
         }
     }
 }
