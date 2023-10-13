@@ -37,12 +37,19 @@ namespace Stuffed_Animal_Shop.Controllers
                         Problem("Entity set 'ApplicationDbContext.Products'  is null.");
         }
 
-        //[Route("/shop/detail/{productId}")]
+        [Route("/shop/detail/{productId}")]
         public IActionResult Detail([FromRoute] string productId)
         {
-            //var product = _context.Products.Where(p => p.ProductId == Guid.Parse(productId)).FirstOrDefault();
-            Console.WriteLine();
-            return View();
+            var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+
+            var user = this._userService.GetUserByEmail(userEmail);
+
+            if (user != null)
+            {
+                ViewBag.User = user;
+            }
+
+            return View(user);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
