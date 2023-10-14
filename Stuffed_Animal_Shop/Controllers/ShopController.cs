@@ -44,12 +44,14 @@ namespace Stuffed_Animal_Shop.Controllers
 
             var user = this._userService.GetUserByEmail(userEmail);
 
+            var product = _context.Products.FirstOrDefault(p => p.ProductId == Guid.Parse(productId));
+
             if (user != null)
             {
                 ViewBag.User = user;
             }
 
-            return View(user);
+            return View("Detail", product);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

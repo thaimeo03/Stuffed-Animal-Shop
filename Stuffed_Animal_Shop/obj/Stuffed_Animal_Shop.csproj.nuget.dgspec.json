@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\ASP.NET\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {}
+    "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {}
   },
   "projects": {
-    "E:\\ASP.NET\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {
+    "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ASP.NET\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
+        "projectUniqueName": "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
         "projectName": "Stuffed_Animal_Shop",
-        "projectPath": "E:\\ASP.NET\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
+        "projectPath": "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
         "packagesPath": "C:\\Users\\thait\\.nuget\\packages\\",
-        "outputPath": "E:\\ASP.NET\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop\\obj\\",
+        "outputPath": "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thait\\AppData\\Roaming\\NuGet\\NuGet.Config",
