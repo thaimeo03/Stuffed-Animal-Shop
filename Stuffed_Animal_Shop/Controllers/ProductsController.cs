@@ -57,8 +57,8 @@ namespace Stuffed_Animal_Shop.Controllers
                 {
                     Name = createProduct.Name,
                     Price = createProduct.Price,
-                    Size = createProduct.Size,
-                    Color = createProduct.Color,
+                    //Size = createProduct.Size,
+                    //Color = createProduct.Color,
                     Quantity = createProduct.Quantity,
                     Description = createProduct.Description,
                     MainImage = image.Url.ToString(),
@@ -104,8 +104,8 @@ namespace Stuffed_Animal_Shop.Controllers
             {
                 Name = product.Name,
                 Price = product.Price,
-                Size = product.Size,
-                Color = product.Color,
+                //Size = product.Size,
+                //Color = product.Color,
                 Quantity = product.Quantity,
                 Description = product.Description,
             };

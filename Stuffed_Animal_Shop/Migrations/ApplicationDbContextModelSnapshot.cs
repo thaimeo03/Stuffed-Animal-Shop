@@ -34,7 +34,7 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasIndex("ProductsProductId");
 
-                    b.ToTable("CartProduct", (string)null);
+                    b.ToTable("CartProduct");
                 });
 
             modelBuilder.Entity("CategoryProduct", b =>
@@ -49,7 +49,7 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasIndex("ProductsProductId");
 
-                    b.ToTable("CategoryProduct", (string)null);
+                    b.ToTable("CategoryProduct");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
@@ -59,7 +59,7 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasKey("CartId");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Category", b =>
@@ -77,7 +77,27 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Color", b =>
+                {
+                    b.Property<Guid>("ColorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ColorId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Image", b =>
@@ -103,7 +123,7 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Images", (string)null);
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Order", b =>
@@ -128,7 +148,7 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Product", b =>
@@ -136,10 +156,6 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.Property<Guid>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
@@ -162,10 +178,6 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Size")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)");
-
                     b.Property<int>("Sold")
                         .HasColumnType("int");
 
@@ -174,7 +186,7 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Review", b =>
@@ -203,7 +215,27 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Size", b =>
+                {
+                    b.Property<Guid>("SizeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("SizeId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.User", b =>
@@ -248,7 +280,7 @@ namespace Stuffed_Animal_Shop.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CartProduct", b =>
@@ -292,6 +324,13 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Color", b =>
+                {
+                    b.HasOne("Stuffed_Animal_Shop.Models.Product", null)
+                        .WithMany("Colors")
+                        .HasForeignKey("ProductId");
+                });
+
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Image", b =>
                 {
                     b.HasOne("Stuffed_Animal_Shop.Models.Product", "Product")
@@ -325,10 +364,24 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Size", b =>
+                {
+                    b.HasOne("Stuffed_Animal_Shop.Models.Product", null)
+                        .WithMany("Sizes")
+                        .HasForeignKey("ProductId");
+                });
+
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
                 {
                     b.Navigation("Order")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Product", b =>
+                {
+                    b.Navigation("Colors");
+
+                    b.Navigation("Sizes");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.User", b =>

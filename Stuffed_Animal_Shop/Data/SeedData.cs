@@ -1,8 +1,6 @@
 ﻿using Stuffed_Animal_Shop.Models;
 using Bogus;
 
-
-
 namespace Stuffed_Animal_Shop.Data
 {
     public class SeedData
@@ -23,6 +21,8 @@ namespace Stuffed_Animal_Shop.Data
             var reviews = GenerateFakeReview(reviewCount);
             var orders = GenerateFakeOrder(orderCount, users);
             var images = GenerateFakeImage(productCount);
+            var sizes = GenerateFakeSize(4);
+            var colors = GenerateFakeColor(3);
 
             for (int i = 0; i < userCount; i++)
             {
@@ -33,6 +33,8 @@ namespace Stuffed_Animal_Shop.Data
             {
                 products[i].Categories = RandomListItem(categories);
                 products[i].Carts = RandomListItem(carts);
+                products[i].Sizes = RandomListItem(sizes);
+                products[i].Colors = RandomListItem(colors);
                 images[i].Product = products[i];
             }
 
@@ -53,6 +55,8 @@ namespace Stuffed_Animal_Shop.Data
             _context.Orders.AddRange(orders);
             _context.Categories.AddRange(categories);
             _context.Carts.AddRange(carts);
+            _context.Sizes.AddRange(sizes);
+            _context.Colors.AddRange(colors);
             _context.Images.AddRange(images);
 
             await _context.SaveChangesAsync();
@@ -116,8 +120,6 @@ namespace Stuffed_Animal_Shop.Data
                 .RuleFor(p => p.ProductId, f => f.Random.Guid())
                 .RuleFor(p => p.Name, f => f.Commerce.ProductName())
                 .RuleFor(p => p.Price, f => f.Random.Number(1, 120))
-                .RuleFor(p => p.Size, f => f.PickRandom("L", "XL", "M", "SM", "XXL"))
-                .RuleFor(p => p.Color, f => f.Commerce.Color())
                 .RuleFor(p => p.Quantity, f => f.Random.Number(20, 350))
                 .RuleFor(p => p.Sold, f => f.Random.Number(0, 200))
                 .RuleFor(p => p.Description, f => f.Commerce.ProductDescription())
@@ -183,6 +185,38 @@ namespace Stuffed_Animal_Shop.Data
 
             return images;
         }
+
+        public List<Size> GenerateFakeSize(int count)
+        {
+            var sizes = new List<Size>();
+            var sizeFaker = new Faker<Size>()
+                .RuleFor(s => s.SizeId, f => f.Random.Guid())
+                .RuleFor(s => s.Name, f => f.PickRandom("L", "XL", "M", "SM", "XXL"));
+
+            for (int i = 0; i < count; i++)
+            {
+                var image = sizeFaker.Generate();
+                sizes.Add(image);
+            }
+
+            return sizes;
+        }
+        public List<Color> GenerateFakeColor(int count)
+        {
+            var colors = new List<Color>();
+            var colorFaker = new Faker<Color>()
+                .RuleFor(s => s.ColorId, f => f.Random.Guid())
+                .RuleFor(s => s.Name, f => f.Commerce.Color());
+
+            for (int i = 0; i < count; i++)
+            {
+                var image = colorFaker.Generate();
+                colors.Add(image);
+            }
+
+            return colors;
+        }
+
 
         public List<T> RandomListItem<T>(List<T> list)
         {
