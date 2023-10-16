@@ -11686,24 +11686,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Minh Hieu\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\thait\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\06_C#_exe\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
+      "projectUniqueName": "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
       "projectName": "Stuffed_Animal_Shop",
-      "projectPath": "D:\\06_C#_exe\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
-      "packagesPath": "C:\\Users\\Minh Hieu\\.nuget\\packages\\",
-      "outputPath": "D:\\06_C#_exe\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\obj\\",
+      "projectPath": "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
+      "packagesPath": "C:\\Users\\thait\\.nuget\\packages\\",
+      "outputPath": "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Minh Hieu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\thait\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11711,7 +11706,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
