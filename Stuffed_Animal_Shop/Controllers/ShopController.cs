@@ -14,14 +14,16 @@ namespace Stuffed_Animal_Shop.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserService _userService;
+        private readonly ShopService _shopService;
 
         public ShopController(ApplicationDbContext context)
         {
             _context = context;
             _userService = new UserService(context);
+            _shopService = new ShopService(context);
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, int pageSize = 21)
         {
             var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
 
@@ -32,8 +34,15 @@ namespace Stuffed_Animal_Shop.Controllers
                 ViewBag.User = user;
             }
 
-            return _context.Products != null ?
-                        View(await _context.Products.ToListAsync()) :
+
+            ProductResult productResult = this._shopService.GetProducts(page, pageSize);
+
+            var products = productResult.Products;
+            ViewBag.TotalPages = productResult.TotalPages;
+            ViewBag.Page = productResult.CurrentPage;
+
+            return products != null ?
+                        View(products) :
                         Problem("Entity set 'ApplicationDbContext.Products'  is null.");
         }
 
