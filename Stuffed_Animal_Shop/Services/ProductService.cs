@@ -64,8 +64,8 @@ namespace Stuffed_Animal_Shop.Services
             product.Description = editProduct.Description;
             product.Price = editProduct.Price;
             product.Quantity = editProduct.Quantity;
-            product.Size = editProduct.Size;
-            product.Color = editProduct.Color;
+            //product.Size = editProduct.Size;
+            //product.Color = editProduct.Color;
             product.MainImage = mainImageUrl;
 
             _context.Products.Update(product);

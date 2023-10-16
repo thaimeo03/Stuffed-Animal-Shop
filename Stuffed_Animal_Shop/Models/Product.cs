@@ -24,12 +24,12 @@ namespace Stuffed_Animal_Shop.Models
         [Column(TypeName = "int")]
         public int Price { get; set; }
 
-        [Required]
-        [Column(TypeName = "nvarchar(10)")]
-        public string Size { get; set; }
+        //[Required]
+        //[Column(TypeName = "nvarchar(10)")]
+        //public string Size { get; set; }
 
-        [Column(TypeName = "nvarchar(20)")]
-        public string Color { get; set; } = "";
+        //[Column(TypeName = "nvarchar(20)")]
+        //public string Color { get; set; } = "";
 
         [Required]
         [Column(TypeName = "int")]
@@ -55,5 +55,8 @@ namespace Stuffed_Animal_Shop.Models
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }
+
+        public ICollection<Size> Sizes { get; set; }
+        public ICollection<Color> Colors { get; set; }
     }
 }
