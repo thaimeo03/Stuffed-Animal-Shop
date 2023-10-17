@@ -4,6 +4,11 @@
     ViewData["HideHero"] = true;    
 }
 
+@{
+    var colors = ViewBag.Colors as List<Color>;
+    var sizes = ViewBag.Sizes as List<Size>;
+}
+
 @using Stuffed_Animal_Shop.ViewModels.Products;
 @model Product;
 
@@ -60,6 +65,14 @@
                         //         <label class="custom-control-label" for="@Model.Size">@Model.Size</label>
                         //     </div>
                         // }
+
+                        foreach (Size size in sizes)
+                        {
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="@size" name="size">
+                                <label class="custom-control-label" for="@size">@size</label>
+                            </div>
+                        }
                     }
                 </form>
             </div>
