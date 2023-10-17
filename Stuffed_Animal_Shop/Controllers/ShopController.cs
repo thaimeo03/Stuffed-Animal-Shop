@@ -55,10 +55,17 @@ namespace Stuffed_Animal_Shop.Controllers
 
             var product = _context.Products.FirstOrDefault(p => p.ProductId == Guid.Parse(productId));
 
+            var colors = _context.Colors.Where(c => c.Product == product).ToList();
+
+            var sizes = _context.Sizes.Where(s => s.Product == product).ToList();
+
             if (user != null)
             {
                 ViewBag.User = user;
             }
+
+            ViewBag.Colors = colors;
+            ViewBag.Sizes = sizes;
 
             return View("Detail", product);
         }
