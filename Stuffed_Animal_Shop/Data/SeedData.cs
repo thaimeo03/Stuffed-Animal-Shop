@@ -33,9 +33,16 @@ namespace Stuffed_Animal_Shop.Data
             {
                 products[i].Categories = RandomListItem(categories);
                 products[i].Carts = RandomListItem(carts);
-                products[i].Sizes = RandomListItem(sizes);
-                products[i].Colors = RandomListItem(colors);
                 images[i].Product = products[i];
+
+                for(int j =  0; j < 4; j++)
+                {
+                    sizes[j].Product = products[i];
+                }
+                for (int j = 0; j < 3; j++)
+                {
+                    colors[j].Product = products[i];
+                }
             }
 
             for (int i = 0; i < reviewCount; i++)

@@ -57,12 +57,31 @@ namespace Stuffed_Animal_Shop.Controllers
                 {
                     Name = createProduct.Name,
                     Price = createProduct.Price,
-                    //Size = createProduct.Size,
-                    //Color = createProduct.Color,
                     Quantity = createProduct.Quantity,
                     Description = createProduct.Description,
                     MainImage = image.Url.ToString(),
                 };
+
+                var sizeList = new List<Size>();
+                var colorList = new List<Color>();
+
+                foreach (var item in createProduct.Sizes)
+                {
+                    sizeList.Add(new Size()
+                    {
+                        Name = item,
+                        Product = product
+                    });
+                }
+
+                foreach (var item in createProduct.Colors)
+                {
+                    colorList.Add(new Color()
+                    {
+                        Name = item,
+                        Product = product
+                    });
+                }
 
                 var images = _photoService.AddPhotosAsync(createProduct.Images);
                 var listImagesProduct = new List<Image>();
@@ -76,8 +95,10 @@ namespace Stuffed_Animal_Shop.Controllers
                     listImagesProduct.Add(newImage);
                 }
 
-                _context.Add(product);
+                _context.AddRange(sizeList);
+                _context.AddRange(colorList);
                 _context.AddRange(listImagesProduct);
+                _context.Add(product);
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
@@ -184,12 +205,13 @@ namespace Stuffed_Animal_Shop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            Console.WriteLine(id);
+
+
             if (_context.Products == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Products'  is null.");
             }
-            var product = await _context.Products.FindAsync(id);
+            var product = _productService.GetProductById(id);
 
             //Delete images in cloudinary
             var mainImagePublicId = this._photoService.GetPublicId(product.MainImage);

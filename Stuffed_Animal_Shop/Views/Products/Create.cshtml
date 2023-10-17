@@ -23,16 +23,68 @@
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Size" class="control-label"></label>
-                <input asp-for="Size" class="form-control" />
-                <span asp-validation-for="Size" class="text-danger"></span>
+                <label class="control-label">Sizes:</label>
+                <div class="checkbox d-flex gap-4">
+                    <label>
+                        <input type="checkbox" name="Sizes" value="SM" />
+                        SM
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Sizes" value="M" />
+                        M
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Sizes" value="L" />
+                        L
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Sizes" value="XL" />
+                        XL
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Sizes" value="XXL" />
+                        XXL
+                    </label>
+                </div>
+                <span asp-validation-for="Sizes" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <input asp-for="Color" class="form-control" />
-                <span asp-validation-for="Color" class="text-danger"></span>
+                <label class="control-label">Colors:</label>
+                <div class="checkbox d-flex gap-4" style="width: 600px;">
+                    <label>
+                        <input type="checkbox" name="Colors" value="red" />
+                        Red
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="blue" />
+                        Blue
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="green" />
+                        Green
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="yellow" />
+                        Yellow
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="purple" />
+                        Purple
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="orange" />
+                        Orange
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="black" />
+                        Black
+                    </label>
+                </div>
             </div>
+
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
                 <input asp-for="Quantity" class="form-control" />

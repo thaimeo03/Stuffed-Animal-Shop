@@ -19,11 +19,14 @@
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             @* <th>
-                @Html.DisplayNameFor(model => model.Size)
+                @Html.DisplayNameFor(model => model.Sizes)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Color)
+                @Html.DisplayNameFor(model => model.Colors)
             </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
@@ -55,10 +58,26 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             @* <td>
-                @Html.DisplayFor(modelItem => item.Size)
+                @{
+                    if (item.Sizes != null)
+                    {
+                        foreach (var size in item.Sizes)
+                        {
+                            <span style="color: blue;">@size.Name</span>
+                        }
+                    }
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Color)
+                @{
+                    if (item.Colors != null)
+                    {
+                        foreach (var color in item.Colors)
+                        {
+                            <span>@color.Name</span>
+                        }
+                    }
+                }
             </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)

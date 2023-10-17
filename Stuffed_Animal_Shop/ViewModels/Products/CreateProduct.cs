@@ -1,4 +1,6 @@
-﻿namespace Stuffed_Animal_Shop.ViewModels.Products
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Stuffed_Animal_Shop.ViewModels.Products
 {
     public class CreateProduct
     {
@@ -6,9 +8,9 @@
 
         public int Price { get; set; }
 
-        public string Size { get; set; }
+        public List<string> Sizes { get; set; }
 
-        public string Color { get; set; } = "";
+        public List<string> Colors { get; set; }
 
         public int Quantity { get; set; }
 
