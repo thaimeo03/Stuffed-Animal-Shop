@@ -13,5 +13,7 @@ namespace Stuffed_Animal_Shop.Models
         [Required]
         [Column(TypeName = "nvarchar(10)")]
         public string Name { get; set; }
+
+        public Product Product { get; set; }
     }
 }

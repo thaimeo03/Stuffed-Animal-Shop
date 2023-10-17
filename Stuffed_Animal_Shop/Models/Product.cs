@@ -55,8 +55,5 @@ namespace Stuffed_Animal_Shop.Models
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }
-
-        public ICollection<Size> Sizes { get; set; }
-        public ICollection<Color> Colors { get; set; }
     }
 }

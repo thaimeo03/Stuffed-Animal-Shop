@@ -18,5 +18,6 @@ namespace Stuffed_Animal_Shop.Data
         public DbSet<Color> Colors { get; set; }
         public DbSet<Image> Images { get; set; }
 
+
     }
 }
