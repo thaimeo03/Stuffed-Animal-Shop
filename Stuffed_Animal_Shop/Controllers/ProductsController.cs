@@ -121,12 +121,27 @@ namespace Stuffed_Animal_Shop.Controllers
                 return NotFound();
             }
 
+            var sizes = _context.Sizes.Where(s => s.Product == product).ToList();
+            var colors = _context.Colors.Where(c => c.Product == product).ToList();
+
+            List<string> sizesString = new List<string>();
+            foreach ( var size in sizes)
+            {
+                sizesString.Add(size.Name.ToString());
+            }
+
+            List<string> colorsString = new List<string>();
+            foreach (var color in colors)
+            {
+                colorsString.Add(color.Name.ToString());
+            }
+
             var editProduct = new EditProduct()
             {
                 Name = product.Name,
                 Price = product.Price,
-                //Size = product.Size,
-                //Color = product.Color,
+                Sizes = sizesString,
+                Colors = colorsString,
                 Quantity = product.Quantity,
                 Description = product.Description,
             };

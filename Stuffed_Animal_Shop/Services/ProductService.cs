@@ -60,14 +60,35 @@ namespace Stuffed_Animal_Shop.Services
                 _context.AddRange(listImagesProduct);
             }
 
+            var sizeList = new List<Size>();
+            var colorList = new List<Color>();
+
+            foreach (var item in editProduct.Sizes)
+            {
+                sizeList.Add(new Size()
+                {
+                    Name = item,
+                    Product = product
+                });
+            }
+
+            foreach (var item in editProduct.Colors)
+            {
+                colorList.Add(new Color()
+                {
+                    Name = item,
+                    Product = product
+                });
+            }
+
             product.Name = editProduct.Name;
             product.Description = editProduct.Description;
             product.Price = editProduct.Price;
             product.Quantity = editProduct.Quantity;
-            //product.Size = editProduct.Size;
-            //product.Color = editProduct.Color;
             product.MainImage = mainImageUrl;
 
+            _context.Sizes.UpdateRange(sizeList);
+            _context.Colors.UpdateRange(colorList);
             _context.Products.Update(product);
         }
     }
