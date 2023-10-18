@@ -40,9 +40,15 @@ namespace Stuffed_Animal_Shop.Migrations
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
                 {
                     b.Property<Guid>("CartId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CartId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Carts");
                 });
@@ -319,8 +325,8 @@ namespace Stuffed_Animal_Shop.Migrations
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
                 {
                     b.HasOne("Stuffed_Animal_Shop.Models.User", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("Stuffed_Animal_Shop.Models.Cart", "CartId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -410,12 +416,6 @@ namespace Stuffed_Animal_Shop.Migrations
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Product", b =>
                 {
                     b.Navigation("CartItem")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Stuffed_Animal_Shop.Models.User", b =>
-                {
-                    b.Navigation("Cart")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
