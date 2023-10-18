@@ -26,5 +26,12 @@ namespace Stuffed_Animal_Shop.Controllers
 						this.View(await _context.Orders.ToListAsync()) :
 						this.Problem("Entity set 'ApplicationDbContext.Orders' is null.");
 		}
+
+		public IActionResult GetTheStuff(Guid yeaTheStuff)
+		{
+			var thatsTheStuff_CartItems = this._context.CartItems.Where(o => o.Cart.CartId == yeaTheStuff).ToList();
+
+			return this.PartialView("OrderDetailed", thatsTheStuff_CartItems);
+		}
 	}
 }

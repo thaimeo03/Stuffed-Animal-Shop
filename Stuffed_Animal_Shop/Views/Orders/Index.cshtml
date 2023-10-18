@@ -52,10 +52,36 @@
 				@Html.DisplayFor(modelItem => item.UpdatedAt)
 			</td>
 			<td>
-				<a asp-action="Edit" asp-route-id="@item.OrderId">Edit</a> |
-				<a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+				<a class="nav-link" id="@item.Cart.CartId">Detail</a>
 			</td>
 		</tr>
-}
+			<tr class="contentForStuff" id="@item.Cart.CartId">
+
+		</tr>
+}	
 	</tbody>
 </table>
+
+@section Scripts {
+	<script>
+		alert("wahhhh");
+
+		$("a").click(function (e) {
+			var cartId = $(this).attr("id");
+
+			alert(cartId);
+
+			$.ajax({
+				url: '@Url.Action("GetTheStuff", "Orders")',
+				data: { yeaTheStuff: cartId },
+				success: function (response) {
+					alert("ajax success!");
+					$("div.contentForStuff#" + cartId).html(response);
+				},
+				error: function (xhr, status, error) {
+					alert(xhr.status + "\n" + xhr.statusText + "\n" + xhr.responseText);
+				}
+			});
+		});
+	</script>
+}
