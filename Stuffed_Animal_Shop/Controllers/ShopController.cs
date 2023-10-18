@@ -59,6 +59,8 @@ namespace Stuffed_Animal_Shop.Controllers
 
             var sizes = _context.Sizes.Where(s => s.Product == product).ToList();
 
+            var images = _context.Images.Where(i => i.Product == product).ToList();
+
             if (user != null)
             {
                 ViewBag.User = user;
@@ -66,6 +68,7 @@ namespace Stuffed_Animal_Shop.Controllers
 
             ViewBag.Colors = colors;
             ViewBag.Sizes = sizes;
+            ViewBag.Images = images;
 
             return View("Detail", product);
         }
