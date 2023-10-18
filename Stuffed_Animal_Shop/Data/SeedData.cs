@@ -27,7 +27,7 @@ namespace Stuffed_Animal_Shop.Data
 
             for (int i = 0; i < userCount; i++)
             {
-                users[i].Cart = carts[i];
+                carts[i].User = users[i];
             }
 
             for(int i = 0;  i < userCount; i++)
