@@ -22,21 +22,6 @@ namespace Stuffed_Animal_Shop.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CartProduct", b =>
-                {
-                    b.Property<Guid>("CartsCartId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductsProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CartsCartId", "ProductsProductId");
-
-                    b.HasIndex("ProductsProductId");
-
-                    b.ToTable("CartProduct");
-                });
-
             modelBuilder.Entity("CategoryProduct", b =>
                 {
                     b.Property<Guid>("CategoriesCategoryId")
@@ -60,6 +45,39 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.HasKey("CartId");
 
                     b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.CartItem", b =>
+                {
+                    b.Property<Guid>("CartItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CartId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("CartItemId");
+
+                    b.HasIndex("CartId");
+
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Category", b =>
@@ -283,21 +301,6 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CartProduct", b =>
-                {
-                    b.HasOne("Stuffed_Animal_Shop.Models.Cart", null)
-                        .WithMany()
-                        .HasForeignKey("CartsCartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Stuffed_Animal_Shop.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("CategoryProduct", b =>
                 {
                     b.HasOne("Stuffed_Animal_Shop.Models.Category", null)
@@ -322,6 +325,25 @@ namespace Stuffed_Animal_Shop.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.CartItem", b =>
+                {
+                    b.HasOne("Stuffed_Animal_Shop.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Stuffed_Animal_Shop.Models.Product", "Product")
+                        .WithOne("CartItem")
+                        .HasForeignKey("Stuffed_Animal_Shop.Models.CartItem", "CartItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Color", b =>
@@ -382,6 +404,12 @@ namespace Stuffed_Animal_Shop.Migrations
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
                 {
                     b.Navigation("Order")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Product", b =>
+                {
+                    b.Navigation("CartItem")
                         .IsRequired();
                 });
 
