@@ -21,7 +21,7 @@ namespace Stuffed_Animal_Shop.Controllers
         }
         public IActionResult Index()
         {
-            var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+            var userEmail = this.HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
 
             var user = this._userService.GetUserByEmail(userEmail);
 
