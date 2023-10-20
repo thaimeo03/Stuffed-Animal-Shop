@@ -10,6 +10,9 @@ namespace Stuffed_Animal_Shop.Models
         public Guid OrderItemId { get; set; }
 
         [Required]
+        public Guid ProductId { get; set; }
+
+        [Required]
         [Column(TypeName = "nvarchar(100)")]
         [MinLength(1)]
         public string Name { get; set; }
