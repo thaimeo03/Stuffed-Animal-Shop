@@ -52,12 +52,17 @@
 				@Html.DisplayFor(modelItem => item.UpdatedAt)
 			</td>
 			<td>
-				<a class="nav-link" id="@item.Cart.CartId">Detail</a>
+					@if (item.Cart != null)
+						{						
+						<a class="nav-link" id="@item.Cart.CartId">Detail</a>
+					}
+					@* <a class="nav-link" id="@item.OrderId">Detail</a> *@
 			</td>
 		</tr>
-			<tr class="contentForStuff" id="@item.Cart.CartId">
+			@* <tr class="contentforstuff" id="@item.Cart.CartId">
+			@* <tr class="contentForStuff" id="@item.OrderId">
 
-		</tr>
+		</tr> *@
 }	
 	</tbody>
 </table>
@@ -76,6 +81,7 @@
 				data: { yeaTheStuff: cartId },
 				success: function (response) {
 					alert("ajax success!");
+
 					$("div.contentForStuff#" + cartId).html(response);
 				},
 				error: function (xhr, status, error) {

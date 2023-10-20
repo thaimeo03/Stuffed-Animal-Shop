@@ -44,6 +44,8 @@ namespace Stuffed_Animal_Shop.Controllers
 				avatar: null
 			);
 
+			//this.ViewBag.Message = "Temp!";
+
 			return this.View(userEdit);
 		}
 
@@ -100,8 +102,11 @@ namespace Stuffed_Animal_Shop.Controllers
 				{
 					Console.WriteLine("imageUrl EXISTS");
 
-					var imageID = this._photoService.GetPublicId(imageUrl: user.Avatar);
-					await this._photoService.DeletePhotoAsync(imageID);
+					if (user.Avatar != "") 
+					{
+						var imageID = this._photoService.GetPublicId(imageUrl: user.Avatar);
+						await this._photoService.DeletePhotoAsync(imageID);
+					}
 
 					user.Avatar = imageUrl;
 				}
@@ -111,8 +116,12 @@ namespace Stuffed_Animal_Shop.Controllers
 			}
 			catch (Exception ex)
 			{
-				return this.NotFound();
+				this.ViewBag.Message = ex.Message;
+
+				return this.View();
 			}
+
+			this.ViewBag.Message = "Profile updated successfully!";
 
 			return this.View();
 		}
