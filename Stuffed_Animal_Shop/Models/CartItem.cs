@@ -29,6 +29,10 @@ namespace Stuffed_Animal_Shop.Models
         public string Color { get; set; }
 
         [Required]
+        [Column(TypeName = "nvarchar(200)")]
+        public string Image { get; set; }
+
+        [Required]
         [Column(TypeName = "int")]
         public decimal ItemPrice { get; set; }
 

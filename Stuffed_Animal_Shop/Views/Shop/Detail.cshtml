@@ -5,8 +5,8 @@
 }
 
 @{
-    var colors = ViewBag.Colors as List<Color>;
-    var sizes = ViewBag.Sizes as List<Size>;
+    // var colors = ViewBag.Colors as List<Color>;
+    // var sizes = ViewBag.Sizes as List<Size>;
     var images = ViewBag.Images as List<Image>;
 }
 
@@ -39,7 +39,9 @@
             </div>
         </div>
 
-        <div class="col-lg-7 pb-5">
+        @await Component.InvokeAsync("AddToCart", new { productId = Model.ProductId });
+
+        @* <form class="col-lg-7 pb-5">
             <h3 class="font-weight-semi-bold">@Model.Name</h3>
             <div class="d-flex mb-3">
                 <div class="text-primary mr-2">
@@ -55,31 +57,31 @@
             <p class="mb-4">@Model.Description</p>
             <div class="d-flex mb-3">
                 <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
-                <form>
+                <div>
                     @{
                         foreach (Size size in sizes)
                         {
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="@size.Name" name="size">
+                                <input type="radio" class="custom-control-input" id="@size.Name" name="Size">
                                 <label class="custom-control-label" for="@size.Name">@size.Name</label>
                             </div>
                         }
                     }
-                </form>
+                </div>
             </div>
             <div class="d-flex mb-4">
                 <p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
-                <form>
+                <div>
                     @{
                         foreach (Color color in colors)
                         {
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="@color.Name" name="size">
+                                <input type="radio" class="custom-control-input" id="@color.Name" name="Color">
                                 <label class="custom-control-label" for="@color.Name">@color.Name</label>
                             </div>
                         }
                     }
-                </form>
+                </div>
             </div>
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 130px;">
@@ -114,7 +116,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </form> *@
     </div>
     <div class="row px-xl-5">
         <div class="col">

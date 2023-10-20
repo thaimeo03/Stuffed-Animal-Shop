@@ -21,13 +21,13 @@ namespace Stuffed_Animal_Shop.Data
             var reviews = GenerateFakeReview(reviewCount);
             var orders = GenerateFakeOrder(orderCount, users);
             var images = GenerateFakeImage(productCount);
-            var sizes = GenerateFakeSize(4);
-            var colors = GenerateFakeColor(3);
+            //var sizes = GenerateFakeSize(4);
+            //var colors = GenerateFakeColor(3);
             var cartItems = GenerateFakeCartItem(5);
 
             for (int i = 0; i < userCount; i++)
             {
-                carts[i].User = users[i];
+                users[i].Cart = carts[i];
             }
 
             for(int i = 0;  i < userCount; i++)
@@ -44,14 +44,19 @@ namespace Stuffed_Animal_Shop.Data
                 products[i].Categories = RandomListItem(categories);
                 images[i].Product = products[i];
 
-                for(int j =  0; j < 4; j++)
+                var sizes = GenerateFakeSize(4);
+                for (int j = 0; j < 4; j++)
                 {
                     sizes[j].Product = products[i];
                 }
+                var colors = GenerateFakeColor(3);
                 for (int j = 0; j < 3; j++)
                 {
                     colors[j].Product = products[i];
                 }
+
+                _context.Sizes.AddRange(sizes);
+                _context.Colors.AddRange(colors);
             }
 
             for (int i = 0; i < reviewCount; i++)
@@ -71,8 +76,6 @@ namespace Stuffed_Animal_Shop.Data
             _context.Orders.AddRange(orders);
             _context.Categories.AddRange(categories);
             _context.Carts.AddRange(carts);
-            _context.Sizes.AddRange(sizes);
-            _context.Colors.AddRange(colors);
             _context.Images.AddRange(images);
             _context.CartItems.AddRange(cartItems);
 
@@ -243,7 +246,8 @@ namespace Stuffed_Animal_Shop.Data
                 .RuleFor(p => p.ItemPrice, f => f.Random.Number(2, 200))
                 .RuleFor(p => p.Count, f => f.Random.Number(1, 5))
                 .RuleFor(p => p.Size, f => f.PickRandom("L", "XL", "M", "SM", "XXL"))
-                .RuleFor(p => p.Color, f => f.PickRandom("Red", "Green", "Blue", "White", "Black"));
+                .RuleFor(p => p.Color, f => f.PickRandom("Red", "Green", "Blue", "White", "Black"))
+                .RuleFor(p => p.Image, f => f.Image.PicsumUrl());
 
             for (int i = 0; i < count; i++)
             {

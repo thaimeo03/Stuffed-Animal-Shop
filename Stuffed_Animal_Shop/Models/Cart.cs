@@ -8,9 +8,11 @@ namespace Stuffed_Animal_Shop.Models
 
         [Key]
         [Column(TypeName = "uniqueidentifier")]
+        [ForeignKey("User")]
         public Guid CartId { get; set; }
 
-        public User User { get; set; }
         public virtual Order Order { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
