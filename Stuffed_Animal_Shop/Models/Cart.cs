@@ -11,8 +11,6 @@ namespace Stuffed_Animal_Shop.Models
         [ForeignKey("User")]
         public Guid CartId { get; set; }
 
-        public virtual Order Order { get; set; }
-
         public virtual User User { get; set; }
     }
 }

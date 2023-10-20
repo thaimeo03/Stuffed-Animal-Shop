@@ -87,7 +87,50 @@ namespace Stuffed_Animal_Shop.Controllers
             return RedirectToAction("Index");
         }
 
-            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        {
+            var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+            var user = this._userService.GetUserByEmail(userEmail);
+
+            var cartItems = _context.CartItems.Where(c => c.Cart.User == user).ToList();
+
+            // Move cartItems to orderItems (get current cart) and delete cartItems in current cart
+            if (cartItems.Count() > 0)
+            {
+                var orderItems = new List<OrderItem>();
+                Order currentOrder = new Order()
+                {
+                    User = user,
+                };
+                foreach (var cartItem in cartItems)
+                {
+                    OrderItem orderItem = new OrderItem()
+                    {
+                        Name = cartItem.Name,
+                        ItemPrice = cartItem.ItemPrice,
+                        Count = cartItem.Count,
+                        Color = cartItem.Color,
+                        Size = cartItem.Size,
+                        Image = cartItem.Image,
+                        Order = currentOrder,
+                    };
+                    orderItems.Add(orderItem);
+                }
+
+                _context.CartItems.RemoveRange(cartItems);
+                _context.Orders.Add(currentOrder);
+                _context.OrderItems.AddRange(orderItems);
+                await _context.SaveChangesAsync();
+            }
+
+
+            return RedirectToAction("Index"); ;
+        }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

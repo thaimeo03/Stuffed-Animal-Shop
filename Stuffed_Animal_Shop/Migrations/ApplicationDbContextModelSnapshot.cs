@@ -157,10 +157,6 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("EmailUser")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
@@ -168,9 +164,52 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("OrderId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.OrderItem", b =>
+                {
+                    b.Property<Guid>("OrderItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("ItemPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("OrderItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Product", b =>
@@ -374,13 +413,24 @@ namespace Stuffed_Animal_Shop.Migrations
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Order", b =>
                 {
-                    b.HasOne("Stuffed_Animal_Shop.Models.Cart", "Cart")
-                        .WithOne("Order")
-                        .HasForeignKey("Stuffed_Animal_Shop.Models.Order", "OrderId")
+                    b.HasOne("Stuffed_Animal_Shop.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cart");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Stuffed_Animal_Shop.Models.OrderItem", b =>
+                {
+                    b.HasOne("Stuffed_Animal_Shop.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Review", b =>
@@ -403,12 +453,6 @@ namespace Stuffed_Animal_Shop.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Cart", b =>
-                {
-                    b.Navigation("Order")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.Product", b =>

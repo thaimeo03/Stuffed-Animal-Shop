@@ -67,7 +67,12 @@ namespace Stuffed_Animal_Shop.Data
 
             for (int i = 0; i < orderCount; i++)
             {
-                orders[i].Cart = RandomListItem(carts)[0];
+                var orderItems = GenerateFakeOrderItem(3);
+                for (int j = 0; j < 3; j++)
+                {
+                    orderItems[j].Order = orders[i];
+                }
+                _context.OrderItems.AddRange(orderItems);
             }
 
             _context.Users.AddRange(users);
@@ -183,7 +188,7 @@ namespace Stuffed_Animal_Shop.Data
             for (int i = 0; i < count; i++)
             {
                 var order = orderFaker.Generate();
-                order.EmailUser = RandomListItem(users)[0].Email;
+                order.User = RandomListItem(users)[0];
                 orders.Add(order);
             }
 
@@ -256,6 +261,27 @@ namespace Stuffed_Animal_Shop.Data
             }
 
             return cartItems;
+        }
+
+        public List<OrderItem> GenerateFakeOrderItem(int count = 3)
+        {
+            var orderItems = new List<OrderItem>();
+            var orderItemFaker = new Faker<OrderItem>()
+                .RuleFor(p => p.OrderItemId, f => f.Random.Guid())
+                .RuleFor(p => p.Name, f => f.Commerce.ProductName())
+                .RuleFor(p => p.ItemPrice, f => f.Random.Number(2, 200))
+                .RuleFor(p => p.Count, f => f.Random.Number(1, 5))
+                .RuleFor(p => p.Size, f => f.PickRandom("L", "XL", "M", "SM", "XXL"))
+                .RuleFor(p => p.Color, f => f.PickRandom("Red", "Green", "Blue", "White", "Black"))
+                .RuleFor(p => p.Image, f => f.Image.PicsumUrl());
+
+            for (int i = 0; i < count; i++)
+            {
+                var orderItem = orderItemFaker.Generate();
+                orderItems.Add(orderItem);
+            }
+
+            return orderItems;
         }
 
 

@@ -8,13 +8,7 @@ namespace Stuffed_Animal_Shop.Models
         [Key]
         [Column(TypeName = "uniqueidentifier")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [ForeignKey("Cart")]
         public Guid OrderId { get; set; }
-
-        [Required]
-        [Column(TypeName = "nvarchar(100)")]
-        [EmailAddress]
-        public string EmailUser { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         public string Status { get; set; } = "Pending";
@@ -25,6 +19,6 @@ namespace Stuffed_Animal_Shop.Models
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        public virtual Cart Cart { get; set; }
+        public User User { get; set; }
     }
 }

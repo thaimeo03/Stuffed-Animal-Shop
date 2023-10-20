@@ -15,9 +15,9 @@
 			<th>
 				@Html.DisplayNameFor(model => model.OrderId)
 			</th>
-			<th>
+			@* <th>
 				@Html.DisplayNameFor(model => model.EmailUser)
-			</th>
+			</th> *@
 			<th>
 				@Html.DisplayNameFor(model => model.Status)
 			</th>
@@ -39,9 +39,9 @@
 			<td>
 				@Html.DisplayFor(modelItem => item.OrderId)
 			</td>
-			<td>
+			@* <td>
 				@Html.DisplayFor(modelItem => item.EmailUser)
-			</td>
+			</td> *@
 			<td>
 				@Html.DisplayFor(modelItem => item.Status)
 			</td>
@@ -52,10 +52,10 @@
 				@Html.DisplayFor(modelItem => item.UpdatedAt)
 			</td>
 			<td>
-					@if (item.Cart != null)
+					@* @if (item.Cart != null)
 						{						
 						<a class="nav-link" id="@item.Cart.CartId">Detail</a>
-					}
+					} *@
 					@* <a class="nav-link" id="@item.OrderId">Detail</a> *@
 			</td>
 		</tr>

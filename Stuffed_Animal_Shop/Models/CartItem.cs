@@ -34,7 +34,7 @@ namespace Stuffed_Animal_Shop.Models
 
         [Required]
         [Column(TypeName = "int")]
-        public decimal ItemPrice { get; set; }
+        public int ItemPrice { get; set; }
 
         public Cart Cart { get; set; }
 
