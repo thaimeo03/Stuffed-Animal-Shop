@@ -14,8 +14,8 @@ namespace Stuffed_Animal_Shop.Data
 
         public async Task GenerateData(int userCount, int productCount, int reviewCount, int orderCount)
         {
-            var users = GenerateFakeUserWithCart(orderCount);
-            var carts = GenerateFakeCart(orderCount);
+            var users = GenerateFakeUserWithCart(userCount);
+            var carts = GenerateFakeCart(userCount);
             var products = GenerateFakeProduct(productCount);
             var categories = GenerateFakeCategory(productCount);
             var reviews = GenerateFakeReview(reviewCount);
@@ -62,7 +62,7 @@ namespace Stuffed_Animal_Shop.Data
 
             for (int i = 0; i < orderCount; i++)
             {
-                orders[i].Cart = carts[i];
+                orders[i].Cart = RandomListItem(carts)[0];
             }
 
             _context.Users.AddRange(users);
