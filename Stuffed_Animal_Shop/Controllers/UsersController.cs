@@ -82,8 +82,10 @@ namespace Stuffed_Animal_Shop.Controllers
             };
 
             var cart = new Cart();
-            user.Cart = cart;
-            _context.Add(user);
+            cart.User = user;
+
+            _context.Users.Add(user);
+            _context.Carts.Add(cart);
 
             this.Auth(user.Email, user.Role);
 

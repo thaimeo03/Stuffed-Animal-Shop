@@ -6,9 +6,9 @@
 
         public int Price { get; set; }
 
-        public string Size { get; set; }
+        public List<string> Sizes { get; set; }
 
-        public string Color { get; set; }
+        public List<string> Colors { get; set; }
 
         public int Quantity { get; set; }
 

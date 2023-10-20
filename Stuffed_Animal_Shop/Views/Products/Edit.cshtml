@@ -28,15 +28,67 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Size" class="control-label"></label>
-                <input asp-for="Size" class="form-control" />
-                <span asp-validation-for="Size" class="text-danger"></span>
+                <label class="control-label">Sizes:</label>
+                <div class="checkbox d-flex gap-4">
+                    <label>
+                        <input type="checkbox" name="Sizes" value="SM" @(Model.Sizes.Contains("SM") ? "checked" : "" ) />
+                        SM
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Sizes" value="M" @(Model.Sizes.Contains("M") ? "checked" : "")/>
+                        M
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Sizes" value="L" @(Model.Sizes.Contains("L") ? "checked" : "") />
+                        L
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Sizes" value="XL" @(Model.Sizes.Contains("XL") ? "checked" : "") />
+                        XL
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Sizes" value="XXL" @(Model.Sizes.Contains("XXL") ? "checked" : "") />
+                        XXL
+                    </label>
+                </div>
+                <span asp-validation-for="Sizes" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <input asp-for="Color" class="form-control" />
-                <span asp-validation-for="Color" class="text-danger"></span>
+                <label class="control-label">Colors:</label>
+                <div class="checkbox d-flex gap-4" style="width: 600px;">
+                    <label>
+                        <input type="checkbox" name="Colors" value="red" @(Model.Colors.Contains("red") ? "checked" : "") />
+                        Red
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="blue" @(Model.Colors.Contains("blue") ? "checked" : "") />
+                        Blue
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="green" @(Model.Colors.Contains("green") ? "checked" : "") />
+                        Green
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="yellow" @(Model.Colors.Contains("yellow") ? "checked" : "") />
+                        Yellow
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="purple" @(Model.Colors.Contains("purple") ? "checked" : "") />
+                        Purple
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="orange" @(Model.Colors.Contains("orange") ? "checked" : "") />
+                        Orange
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Colors" value="black" @(Model.Colors.Contains("black") ? "checked" : "") />
+                        Black
+                    </label>
+                </div>
+                <span asp-validation-for="Colors" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
                 <input asp-for="Quantity" class="form-control" />

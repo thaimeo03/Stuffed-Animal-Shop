@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Stuffed_Animal_Shop.Models.Order>
+
+@{
+	Layout = "_AdminLayout";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.OrderId)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.EmailUser)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Status)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CreatedAt)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.UpdatedAt)
+			</th>
+			<th>
+				Actions
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.OrderId)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.EmailUser)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Status)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CreatedAt)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.UpdatedAt)
+			</td>
+			<td>
+					@if (item.Cart != null)
+						{						
+						<a class="nav-link" id="@item.Cart.CartId">Detail</a>
+					}
+					@* <a class="nav-link" id="@item.OrderId">Detail</a> *@
+			</td>
+		</tr>
+			@* <tr class="contentforstuff" id="@item.Cart.CartId">
+			@* <tr class="contentForStuff" id="@item.OrderId">
+
+		</tr> *@
+}	
+	</tbody>
+</table>
+
+@section Scripts {
+	<script>
+		alert("wahhhh");
+
+		$("a").click(function (e) {
+			var cartId = $(this).attr("id");
+
+			alert(cartId);
+
+			$.ajax({
+				url: '@Url.Action("GetTheStuff", "Orders")',
+				data: { yeaTheStuff: cartId },
+				success: function (response) {
+					alert("ajax success!");
+
+					$("div.contentForStuff#" + cartId).html(response);
+				},
+				error: function (xhr, status, error) {
+					alert(xhr.status + "\n" + xhr.statusText + "\n" + xhr.responseText);
+				}
+			});
+		});
+	</script>
+}

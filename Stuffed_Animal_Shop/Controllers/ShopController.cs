@@ -237,6 +237,12 @@ namespace Stuffed_Animal_Shop.Controllers
             var product = _context.Products.FirstOrDefault(p => p.ProductId == Guid.Parse(productId));
             List<Review> reviews = this._context.Reviews.Where(r => r.Product == product).ToList();
 
+            var colors = _context.Colors.Where(c => c.Product == product).ToList();
+
+            var sizes = _context.Sizes.Where(s => s.Product == product).ToList();
+
+            var images = _context.Images.Where(i => i.Product == product).ToList();
+
             if (user != null)
             {
                 ViewBag.User = user;
@@ -244,6 +250,10 @@ namespace Stuffed_Animal_Shop.Controllers
 
             ViewBag.reviewCnt = reviews.Count;
             ViewBag.user = user;
+
+            ViewBag.Colors = colors;
+            ViewBag.Sizes = sizes;
+            ViewBag.Images = images;
 
             return View("Detail", product);
         }

@@ -14,8 +14,8 @@ namespace Stuffed_Animal_Shop.Data
 
         public async Task GenerateData(int userCount, int productCount, int reviewCount, int orderCount)
         {
-            var users = GenerateFakeUserWithCart(userCount);
-            var carts = GenerateFakeCart(userCount);
+            var users = GenerateFakeUserWithCart(orderCount);
+            var carts = GenerateFakeCart(orderCount);
             var products = GenerateFakeProduct(productCount);
             var categories = GenerateFakeCategory(productCount);
             var reviews = GenerateFakeReview(reviewCount);
@@ -23,16 +23,25 @@ namespace Stuffed_Animal_Shop.Data
             var images = GenerateFakeImage(productCount);
             var sizes = GenerateFakeSize(4);
             var colors = GenerateFakeColor(3);
+            var cartItems = GenerateFakeCartItem(5);
 
             for (int i = 0; i < userCount; i++)
             {
-                users[i].Cart = carts[i];
+                carts[i].User = users[i];
+            }
+
+            for(int i = 0;  i < userCount; i++)
+            {
+                for(int j = 0; j < 5; j++)
+                {
+                    cartItems[j].Cart = carts[j];
+                    cartItems[j].Product = products[j];
+                }
             }
 
             for (int i = 0; i < productCount; i++)
             {
                 products[i].Categories = RandomListItem(categories);
-                products[i].Carts = RandomListItem(carts);
                 images[i].Product = products[i];
 
                 for(int j =  0; j < 4; j++)
@@ -53,7 +62,7 @@ namespace Stuffed_Animal_Shop.Data
 
             for (int i = 0; i < orderCount; i++)
             {
-                orders[i].Cart = RandomListItem(carts)[0];
+                orders[i].Cart = carts[i];
             }
 
             _context.Users.AddRange(users);
@@ -65,6 +74,7 @@ namespace Stuffed_Animal_Shop.Data
             _context.Sizes.AddRange(sizes);
             _context.Colors.AddRange(colors);
             _context.Images.AddRange(images);
+            _context.CartItems.AddRange(cartItems);
 
             await _context.SaveChangesAsync();
         }
@@ -213,7 +223,7 @@ namespace Stuffed_Animal_Shop.Data
             var colors = new List<Color>();
             var colorFaker = new Faker<Color>()
                 .RuleFor(s => s.ColorId, f => f.Random.Guid())
-                .RuleFor(s => s.Name, f => f.Commerce.Color());
+                .RuleFor(s => s.Name, f => f.PickRandom("Red", "Green", "Blue", "White", "Black"));
 
             for (int i = 0; i < count; i++)
             {
@@ -222,6 +232,26 @@ namespace Stuffed_Animal_Shop.Data
             }
 
             return colors;
+        }
+
+        public List<CartItem> GenerateFakeCartItem(int count = 5)
+        {
+            var cartItems = new List<CartItem>();
+            var cartItemFaker = new Faker<CartItem>()
+                .RuleFor(p => p.CartItemId, f => f.Random.Guid())
+                .RuleFor(p => p.Name, f => f.Commerce.ProductName())
+                .RuleFor(p => p.ItemPrice, f => f.Random.Number(2, 200))
+                .RuleFor(p => p.Count, f => f.Random.Number(1, 5))
+                .RuleFor(p => p.Size, f => f.PickRandom("L", "XL", "M", "SM", "XXL"))
+                .RuleFor(p => p.Color, f => f.PickRandom("Red", "Green", "Blue", "White", "Black"));
+
+            for (int i = 0; i < count; i++)
+            {
+                var cartItem = cartItemFaker.Generate();
+                cartItems.Add(cartItem);
+            }
+
+            return cartItems;
         }
 
 

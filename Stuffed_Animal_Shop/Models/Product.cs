@@ -7,7 +7,6 @@ namespace Stuffed_Animal_Shop.Models
     {
         public Product() {
             this.Categories = new HashSet<Category>();
-            this.Carts = new HashSet<Cart>();
         }
 
         [Key]
@@ -23,13 +22,6 @@ namespace Stuffed_Animal_Shop.Models
         [Required]
         [Column(TypeName = "int")]
         public int Price { get; set; }
-
-        //[Required]
-        //[Column(TypeName = "nvarchar(10)")]
-        //public string Size { get; set; }
-
-        //[Column(TypeName = "nvarchar(20)")]
-        //public string Color { get; set; } = "";
 
         [Required]
         [Column(TypeName = "int")]
@@ -52,8 +44,8 @@ namespace Stuffed_Animal_Shop.Models
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-
+        public virtual CartItem CartItem { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
-        public virtual ICollection<Cart> Carts { get; set; }
+
     }
 }
