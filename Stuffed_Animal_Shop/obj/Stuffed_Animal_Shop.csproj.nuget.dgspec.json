@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\ASP.NET\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {}
+    "D:\\06_C#_exe\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {}
   },
   "projects": {
-    "E:\\ASP.NET\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {
+    "D:\\06_C#_exe\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ASP.NET\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
+        "projectUniqueName": "D:\\06_C#_exe\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
         "projectName": "Stuffed_Animal_Shop",
-        "projectPath": "E:\\ASP.NET\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
-        "packagesPath": "C:\\Users\\thait\\.nuget\\packages\\",
-        "outputPath": "E:\\ASP.NET\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\obj\\",
+        "projectPath": "D:\\06_C#_exe\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
+        "packagesPath": "C:\\Users\\Minh Hieu\\.nuget\\packages\\",
+        "outputPath": "D:\\06_C#_exe\\Stuffed-Animal-Shop\\Stuffed_Animal_Shop\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\thait\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Minh Hieu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -98,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
