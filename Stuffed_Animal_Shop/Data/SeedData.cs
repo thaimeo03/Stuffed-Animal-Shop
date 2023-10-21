@@ -216,7 +216,7 @@ namespace Stuffed_Animal_Shop.Data
             var sizes = new List<Size>();
             var sizeFaker = new Faker<Size>()
                 .RuleFor(s => s.SizeId, f => f.Random.Guid())
-                .RuleFor(s => s.Name, f => f.PickRandom("L", "XL", "M", "SM", "XXL"));
+                .RuleFor(s => s.Name, f => f.PickRandom("SM", "M", "L", "XL", "XXL"));
 
             for (int i = 0; i < count; i++)
             {
@@ -231,7 +231,7 @@ namespace Stuffed_Animal_Shop.Data
             var colors = new List<Color>();
             var colorFaker = new Faker<Color>()
                 .RuleFor(s => s.ColorId, f => f.Random.Guid())
-                .RuleFor(s => s.Name, f => f.PickRandom("Red", "Green", "Blue", "White", "Black"));
+                .RuleFor(s => s.Name, f => f.PickRandom("red", "green", "blue", "white", "yellow", "purple", "orange"));
 
             for (int i = 0; i < count; i++)
             {
