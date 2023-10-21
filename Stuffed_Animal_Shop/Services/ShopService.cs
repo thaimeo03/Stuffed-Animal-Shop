@@ -91,7 +91,6 @@ namespace Stuffed_Animal_Shop.Services
                     productsFiltered = productsFiltered
                         .Where(p => productsWithBestRating.Contains(p))
                         .ToList();
-                    // productSort = _context.Reviews.OrderBy(r => r.Rating).Select(r => r.Product).ToList();
                 }
                 else if (sort.Equals("cheap"))
                 {
