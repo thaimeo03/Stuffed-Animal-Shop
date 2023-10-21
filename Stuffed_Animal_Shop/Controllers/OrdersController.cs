@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Stuffed_Animal_Shop.Data;
 using Stuffed_Animal_Shop.Models;
 using Stuffed_Animal_Shop.Services;
+using System.Diagnostics;
 
 namespace Stuffed_Animal_Shop.Controllers
 {
@@ -29,9 +30,14 @@ namespace Stuffed_Animal_Shop.Controllers
 
 		public IActionResult GetTheStuff(Guid yeaTheStuff)
 		{
-			var thatsTheStuff_CartItems = this._context.CartItems.Where(o => o.Cart.CartId == yeaTheStuff).ToList();
+			var thatsTheStuff_OrderItems = this._context.OrderItems.Where(o => o.Order.OrderId == yeaTheStuff).ToList();
 
-			return this.PartialView("OrderDetailed", thatsTheStuff_CartItems);
+			//foreach (var stuff in thatsTheStuff_OrderItems)
+			//{
+			//	Debug.WriteLine("\n" + stuff.Name + "\n");
+			//}
+
+			return this.PartialView("OrderDetailed", thatsTheStuff_OrderItems);
 		}
 	}
 }
