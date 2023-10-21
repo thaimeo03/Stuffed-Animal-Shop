@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Stuffed_Animal_Shop.Data;
 using Stuffed_Animal_Shop.Models;
 using Stuffed_Animal_Shop.Services;
+using Stuffed_Animal_Shop.ViewModels.Filters;
 using Stuffed_Animal_Shop.ViewModels.Shops;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -26,7 +27,8 @@ namespace Stuffed_Animal_Shop.Controllers
             _shopService = new ShopService(context);
         }
 
-        public async Task<IActionResult> Index(int page = 1, int pageSize = 21)
+        [Route("/shop")]
+        public async Task<IActionResult> Index(Filter filter)
         {
             var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
 
@@ -37,21 +39,21 @@ namespace Stuffed_Animal_Shop.Controllers
                 ViewBag.User = user;
             }
 
-            ProductResult productResult = this._shopService.GetProducts(page, pageSize);
+            ProductResult productResult = this._shopService.GetProductsByFilter(filter);
 
-            var products = productResult.Products;
+            List<Product> productsFiltered = productResult.Products;
             ViewBag.TotalPages = productResult.TotalPages;
             ViewBag.Page = productResult.CurrentPage;
 
-            return products != null ?
-                        View(products) :
+            return productsFiltered != null ?
+                        View(productsFiltered) :
                         Problem("Entity set 'ApplicationDbContext.Products'  is null.");
         }
 
 
         [Route("/shop/sort")]
         [HttpPost("/shop/sort")]
-        public async Task<IActionResult> Index(string sort)
+        public async Task<IActionResult> Sort(string sort)
         {
             List<Product> products = new List<Product>();
 
@@ -71,105 +73,6 @@ namespace Stuffed_Animal_Shop.Controllers
 
             return products != null ?
                         View(products) :
-                        Problem("Entity set 'ApplicationDbContext.Products'  is null.");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Filter(IFormCollection form)
-        {
-            List<Product> products = await _context.Products.ToListAsync();
-            List<Color> cls = await _context.Colors.ToListAsync();
-
-            foreach (Color color in cls)
-            {
-                Console.WriteLine(color.Name.ToString());
-            }
-            // Khởi tạo mảng để lưu trữ các giá trị được chọn
-
-            List<Product> productFilter = new List<Product>();
-            List<Product> productFilterPrices = new List<Product>();
-            List<Product> productFilterColors = new List<Product>();
-            List<Product> productFilterSizes = new List<Product>();
-
-            string selectedPrices = "";
-            string selectedColors = "";
-            string selectedSizes = "";
-
-            // Lấy giá trị của các checkbox từ form và thêm vào mảng tương ứng
-            foreach (var key in form.Keys)
-            {
-                if (key.StartsWith("prices"))
-                {
-                    selectedPrices = form[key].ToString();
-                }
-                else if (key.StartsWith("colos"))
-                {
-                    selectedColors = form[key];
-                }
-                else if (key.StartsWith("sizes"))
-                {
-                    selectedSizes = form[key];
-                }
-            }
-
-            List<string> prices = selectedPrices.Split(",").ToList();
-            foreach (string price in prices)
-            {
-                if (price.Equals("all"))
-                {
-                    productFilterPrices = products;
-                    break;
-                }
-                else
-                {
-                    string[] pr = price.Split('-');
-                    int first_price = int.Parse(pr[0]);
-                    int last_price = int.Parse(pr[pr.Length - 1]);
-                    List<Product> listTMP = await _context.Products.Where(p => p.Price >= first_price && p.Price <= last_price).ToListAsync();
-                    productFilterPrices.AddRange(listTMP);
-                }
-            }
-
-            List<string> colors = selectedColors.Split(",").ToList();
-            Console.WriteLine(colors.First());
-
-            if (colors.First().Equals("all") && colors != null)
-            {
-                productFilterColors = products;
-            }
-            else
-            {
-                productFilterColors = await _context.Colors
-                    .Where(c => colors.Contains(c.Name))
-                    .Select(c => c.Product)
-                    .Where(p => p != null)
-                    .Distinct()
-                    .ToListAsync();
-            }
-            Console.WriteLine(productFilterColors.Count);
-
-
-            List<string> sizes = selectedSizes.Split(",").ToList();
-
-            if (sizes[0].Equals("all") && sizes != null)
-            {
-                productFilterSizes = products;
-
-            }
-            else
-            {
-                productFilterSizes = await _context.Sizes
-                    .Where(s => sizes.Contains(s.Name))
-                    .Select(s => s.Product)
-                    .Where(p => p != null)
-                    .Distinct()
-                    .ToListAsync();
-            }
-
-            productFilter = productFilterPrices.Intersect(productFilterSizes).Intersect(productFilterColors).ToList();
-
-            return _context.Products != null ?
-                        View("Index", productFilter) :
                         Problem("Entity set 'ApplicationDbContext.Products'  is null.");
         }
 
