@@ -17,6 +17,8 @@ namespace Stuffed_Animal_Shop.ViewModels.Filters
 
         public int? Name { get; set; } = null;
 
+        public string? Sort { get; set; } = null;
+
         public string ToQueryString()
         {
             var queryString = new List<string>();
@@ -38,6 +40,9 @@ namespace Stuffed_Animal_Shop.ViewModels.Filters
 
             if (Name.HasValue)
                 queryString.Add($"Name={Name}");
+
+            if (Sort != null)
+                queryString.Add($"Sort={Sort}");
 
             return string.Join("&", queryString);
         }

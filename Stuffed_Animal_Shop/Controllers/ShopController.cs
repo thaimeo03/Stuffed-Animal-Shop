@@ -52,31 +52,6 @@ namespace Stuffed_Animal_Shop.Controllers
         }
 
 
-        [Route("/shop/sort")]
-        [HttpPost("/shop/sort")]
-        public async Task<IActionResult> Sort(string sort)
-        {
-            List<Product> products = new List<Product>();
-
-            if(sort.Equals("latest"))
-            {
-                products = await _context.Products.OrderBy(s => s.CreatedAt).ToListAsync();
-            }else if (sort.Equals("best_rating"))
-            {
-                products = await _context.Reviews.OrderBy(r => r.Rating).Select(r => r.Product).ToListAsync();
-            }else if (sort.Equals("cheap"))
-            {
-                products = await _context.Products.OrderBy(s => s.Price).ToListAsync();
-            }else if (sort.Equals("expensive"))
-            {
-                products = await _context.Products.OrderByDescending(s => s.Price).ToListAsync();
-            }
-
-            return products != null ?
-                        View(products) :
-                        Problem("Entity set 'ApplicationDbContext.Products'  is null.");
-        }
-
         [HttpPost]
         public IActionResult CreateReview(IFormCollection form)
         {
@@ -156,6 +131,7 @@ namespace Stuffed_Animal_Shop.Controllers
             //ViewBag.Colors = colors;
             //ViewBag.Sizes = sizes;
             ViewBag.Images = images;
+            ViewBag.reviewCnt = reviews.Count();
 
             return View("Detail", product);
         }

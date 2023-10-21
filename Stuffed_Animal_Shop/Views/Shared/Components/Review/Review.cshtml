@@ -2,6 +2,7 @@
 @model IEnumerable<Review>
 
 @{
+    List<User> listUser = ViewBag.ListUser;
     Product product = ViewBag.Product;
 }
 
@@ -13,11 +14,21 @@
                 int count = 0;
                 foreach (Review review in Model)
                 {
-                    string s = @ViewBag.Avatars[count];
-                    <div class="media mb-4">
-                        <img src="@s" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                    // string s = @ViewBag.Avatars[count];
+                    // Console.WriteLine(s);
+                    <div class="media mb-4 d-flex gap-3">
+                        @{
+                            if (@listUser[count].Avatar != "")
+                            {
+                                <img src="@listUser[count].Avatar" alt="Image" class="img-fluid mt-1 rounded-circle" style="width: 42px; height: 42px;">
+                            }
+                            else
+                            {
+                                <i class="bi bi-person-circle" style="font-size: 38px"></i>
+                            }
+                        }
                         <div class="media-body">
-                            <h6>@ViewBag.Users[count]<small> - <i>@review.CreatedAt</i></small></h6>
+                            <h6>@listUser[count].Name<small> - <i>@review.CreatedAt</i></small></h6>
                             <div class="text-primary mb-2">
                                 @for (int i = 0; i < review.Rating; i++)
                                 {

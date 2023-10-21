@@ -117,6 +117,7 @@
                     </div>
                 </div>
                 <!-- Size End -->
+                <input style="display: none;" name="Sort" value="@filter.Sort" />
                 <!-- Action button Start -->
                 <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input type="submit" class="btn btn-primary" />
@@ -148,11 +149,25 @@
                                     aria-expanded="false">
                                 Sort by
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                <a class="dropdown-item" href="/shop/sort?sort=latest">Latest</a>
-                                <a class="dropdown-item" href="/shop/sort?sort=best_rating">Best Rating</a>
-                                <a class="dropdown-item" href="/shop/sort?sort=cheap">Cheap to expensive</a>
-                                <a class="dropdown-item" href="/shop/sort?sort=expensive">Expensive to cheap</a>
+                            <div>
+                                <div class="dropdown-menu" style="text-align: center;" aria-labelledby="triggerId">
+                                    <div>
+                                        <span style="display: none;">@(filter.Sort = "lastest");</span>
+                                        <a class="btn btn-outline-primary" style="border: none; border-radius:10px;" href="?@filter.ToQueryString()">Latest</a>
+                                    </div>
+                                    <div>
+                                        <span style="display: none;">@(filter.Sort = "best_rating");</span>
+                                        <a class="btn btn-outline-primary" style="border: none; border-radius:10px;" href="?@filter.ToQueryString()">Best Rating</a>
+                                    </div>
+                                    <div>
+                                        <span style="display: none;">@(filter.Sort = "cheap");</span>
+                                        <a class="btn btn-outline-primary" style="border: none; border-radius:10px;" href="?@filter.ToQueryString()">Cheap to expensive</a>
+                                    </div>
+                                    <div>
+                                        <span style="display: none;">@(filter.Sort = "expensive");</span>
+                                        <a class="btn btn-outline-primary" style="border: none; border-radius:10px;" href="?@filter.ToQueryString()">Expensive to cheap</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
