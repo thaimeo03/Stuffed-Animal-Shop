@@ -143,12 +143,15 @@
                                     aria-expanded="false">
                                 Sort by
                             </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                <a class="dropdown-item" href="/shop/sort?sort=latest">Latest</a>
-                                <a class="dropdown-item" href="/shop/sort?sort=best_rating">Best Rating</a>
-                                <a class="dropdown-item" href="/shop/sort?sort=cheap">Cheap to expensive</a>
-                                <a class="dropdown-item" href="/shop/sort?sort=expensive">Expensive to cheap</a>
-                            </div>
+                            <form asp-controller="Shop" asp-action="Index" role="group" method="get">
+                                <div class="dropdown-menu" style="text-align: center;" aria-labelledby="triggerId">
+                                    <button class="btn btn-outline-primary" style="border: none; border-radius:10px;" type="submit" name="Sort" value="latest">Latest</button>
+                                    <button class="btn btn-outline-primary" style="border: none; border-radius:10px;" type="submit" name="Sort" value="best_rating">Best Rating</button>
+                                    <button class="btn btn-outline-primary" style="border: none; border-radius:10px;" type="submit" name="Sort" value="cheap">Cheap to expensive</button>
+                                    <button class="btn btn-outline-primary" style="border: none; border-radius:10px;" type="submit" name="Sort" value="expensive">Expensive to cheap</button>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>

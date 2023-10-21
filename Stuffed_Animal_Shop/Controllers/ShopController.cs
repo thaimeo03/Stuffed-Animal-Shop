@@ -55,6 +55,8 @@ namespace Stuffed_Animal_Shop.Controllers
         [HttpPost("/shop/sort")]
         public async Task<IActionResult> Sort(string sort)
         {
+            string queryString = HttpContext.Request.QueryString.ToString();
+            Console.WriteLine(queryString);
             List<Product> products = new List<Product>();
 
             if(sort.Equals("latest"))
@@ -72,7 +74,7 @@ namespace Stuffed_Animal_Shop.Controllers
             }
 
             return products != null ?
-                        View(products) :
+                        View("Index", products) :
                         Problem("Entity set 'ApplicationDbContext.Products'  is null.");
         }
 

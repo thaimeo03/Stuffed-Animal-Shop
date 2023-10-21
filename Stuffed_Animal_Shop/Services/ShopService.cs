@@ -24,34 +24,79 @@ namespace Stuffed_Animal_Shop.Services
 
         public ProductResult GetProductsByFilter(Filter filter)
         {
+            const string ALL = "all";
             List<string> sizesFiltered = filter.Sizes != null ? filter.Sizes : new List<string>();
             List<string> colorsFiltered = filter.Colors != null ? filter.Colors : new List<string>();
-            List<int> pricesFiltered = filter.Prices != null ? filter.Prices.Select(price => int.Parse(price)).ToList() : new List<int>();
+            List<string> pricesFiltered = filter.Prices != null ? filter.Prices.Select(price => price).ToList() : new List<string>();
             int page = filter.Page != null ? filter.Page.Value : 1;
             int pageSize = filter.PageSize != null ? filter.PageSize.Value : 21;
+            string sort = filter.Sort != null ? filter.Sort : "";
 
             List<Product> productsBySize = new List<Product>();
             List<Product> productsByColor = new List<Product>();
             List<Product> productsByPrice = new List<Product>();
+            List<Product> productSort = new List<Product>();
+            List<Product> productsFiltered = _context.Products.ToList();
 
             if (sizesFiltered.Count > 0)
-            { 
-                productsBySize = _context.Sizes.Where(s => sizesFiltered.Contains(s.Name)).Select(s => s.Product).Where(p => p != null).Distinct().ToList();
+            {
+                productsBySize = sizesFiltered.First().Equals(ALL) ?
+                    _context.Products.Where(p => p != null).Distinct().ToList() :
+                    _context.Sizes.Where(s => sizesFiltered.Contains(s.Name)).Select(s => s.Product).Where(p => p != null).Distinct().ToList();
             }
             if (colorsFiltered.Count > 0)
             {
-                productsByColor = _context.Colors.Where(c => colorsFiltered.Contains(c.Name)).Select(c => c.Product).Where(p => p != null).Distinct().ToList();
+                productsByColor = colorsFiltered.First().Equals(ALL) ?
+                    _context.Products.Where(p => p != null).Distinct().ToList() :
+                    _context.Colors.Where(s => colorsFiltered.Contains(s.Name)).Select(s => s.Product).Where(p => p != null).Distinct().ToList();
             }
-            //if (pricesFiltered.Count > 0)
-            //{
-            //    productsByPrice = _context.Products.Where(product => pricesFiltered.Any(price => price - 100 < product.Price && product.Price < price)).ToList();
-            //}
+            if (pricesFiltered.Count > 0)
+            {
+                
+                //productsByPrice = pricesFiltered.First().Equals(ALL) ?
+                //    _context.Products.Where(p => p != null).Distinct().ToList() :
+                //    _context.Products
+                //        .Where(product => pricesFiltered.Any(price => int.Parse(price) - 100 <= product.Price && product.Price < int.Parse(price)))
+                //        .ToList();
+                if (pricesFiltered.First().Equals(ALL))
+                {
+                    productsByPrice = _context.Products.Where(p => p != null).Distinct().ToList();
+                }
+                else
+                {
+                    foreach (string price in pricesFiltered) {
+                        productsByPrice.AddRange(_context.Products.Where(p => p.Price >= int.Parse(price) - 100 && p.Price < int.Parse(price)).ToList());
+                    }
+                }
+            }
+
+            
 
             // Get all duplicate products
-            List<Product> productsFiltered = _context.Products.ToList();
             if(!(filter.Prices == null && filter.Sizes == null && filter.Colors == null))
             {
-                productsFiltered = productsBySize.Intersect(productsByColor).ToList();
+                productsFiltered = productsBySize.Intersect(productsByColor).Intersect(productsByPrice).ToList();
+            }
+
+            // Sort product
+            if (!sort.Equals(string.Empty))
+            {
+                if (sort.Equals("latest"))
+                {
+                    productsFiltered = productsFiltered.OrderBy(s => s.CreatedAt).ToList();
+                }
+                else if (sort.Equals("best_rating"))
+                {
+                    productSort = _context.Reviews.OrderBy(r => r.Rating).Select(r => r.Product).ToList();
+                }
+                else if (sort.Equals("cheap"))
+                {
+                    productsFiltered = productsFiltered.OrderBy(s => s.Price).ToList();
+                }
+                else if (sort.Equals("expensive"))
+                {
+                    productsFiltered = productsFiltered.OrderByDescending(s => s.Price).ToList();
+                }
             }
 
             // Pagination

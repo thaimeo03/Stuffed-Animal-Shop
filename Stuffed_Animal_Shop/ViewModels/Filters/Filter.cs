@@ -15,5 +15,7 @@ namespace Stuffed_Animal_Shop.ViewModels.Filters
         public int? PageSize { get; set; } = null;
 
         public int? Name { get; set; } = null;
+
+        public string? Sort { get; set; } = null;
     }
 }
