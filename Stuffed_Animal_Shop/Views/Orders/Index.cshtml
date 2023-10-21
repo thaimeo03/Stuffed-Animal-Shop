@@ -15,7 +15,7 @@
 				@Html.DisplayNameFor(model => model.OrderId)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.User.Email)
+				@Html.DisplayNameFor(model => model.User.UserId)
 			</th> 
 			<th>
 				@Html.DisplayNameFor(model => model.Status)
@@ -39,7 +39,7 @@
 				@Html.DisplayFor(modelItem => item.OrderId)
 			</td>
 			<td>
-				@Html.DisplayFor(modelItem => item.User.Email)
+				@Html.DisplayFor(modelItem => item.User.UserId)
 			</td>
 			<td>
 				@Html.DisplayFor(modelItem => item.Status)
@@ -51,10 +51,10 @@
 				@Html.DisplayFor(modelItem => item.UpdatedAt)
 			</td>
 			<td>
-				<a class="nav-link" id="@item.OrderId">Detail</a>
+				<a class="nav-link">Detail</a>
 			</td>
 		</tr>
-		<tr class="contentforstuff" id="@item.OrderId">
+		<tr class="contentforstuff">
 
 		</tr>
 }	
@@ -66,9 +66,13 @@
 		//alert("wahhhh");
 
 		$("a").click(function (e) {
-			var orderId = $(this).attr("id");
+			var test = $(this).parent().parent().children().first().html();
+			var orderId = test.replace(/[^a-zA-Z0-9-]/g, "");
+			var test2 = $(this).parent().parent().next('.contentforstuff');
 
 			//alert(orderId);
+		
+			//$("tr.contentforstuff#" + orderId).html('<td>This is a hard-coded HTML element</td>');
 
 			$.ajax({
 				url: '@Url.Action("GetTheStuff", "Orders")',
@@ -76,7 +80,7 @@
 				success: function (response) {
 					//alert("ajax success!");
 
-					$("tr.contentforstuff#" + orderId).html(response);
+					test2.html(response);
 				},
 				error: function (xhr, status, error) {
 					//alert(xhr.status + "\n" + xhr.statusText + "\n" + xhr.responseText);
