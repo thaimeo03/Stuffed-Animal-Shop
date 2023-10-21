@@ -6,6 +6,7 @@ namespace Stuffed_Animal_Shop.ViewModels.Reviews
 {
     public class CreateReview
     {
+        public Guid ReviewId { get; set; }
 
         public string EmailUser { get; set; }
 
@@ -13,7 +14,8 @@ namespace Stuffed_Animal_Shop.ViewModels.Reviews
 
         public string? Comment { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+        public Product Product { get; set; } = null;
     }
 }

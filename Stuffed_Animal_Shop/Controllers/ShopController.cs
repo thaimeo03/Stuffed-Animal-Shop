@@ -53,52 +53,30 @@ namespace Stuffed_Animal_Shop.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateReview(IFormCollection form)
+        public IActionResult CreateReview(IFormCollection form, Review review)
         {
 
-            string selectedContext = "";
-            string selectedEmail = "";
-            string selectedRatting = "";
             string selectedProductID = "";
 
             foreach (var key in form.Keys)
             {
-                if (key.StartsWith("context"))
-                {
-                    selectedContext = form[key].ToString();
-                }
-                else if (key.StartsWith("email"))
-                {
-                    selectedEmail = form[key];
-                }
-                else if (key.StartsWith("ratting"))
-                {
-                    selectedRatting = form[key];
-                }
-                else if (key.StartsWith("productID"))
+                if (key.StartsWith("productID"))
                 {
                     selectedProductID = form[key];
                 }
             }
-            DateTime d = DateTime.Now;
             Product product = _context.Products.Where(p => p.ProductId == Guid.Parse(selectedProductID)).FirstOrDefault();
             List<Review> reviews = this._context.Reviews.Where(r => r.Product == product).ToList();
 
             try
             {
-                Review review = new Review()
-                {
-                    EmailUser = selectedEmail,
-                    Comment = selectedContext,
-                    Rating = int.Parse(selectedRatting),
-                    CreatedAt = d,
-                    Product = product,
-                };
+                review.Product = product;
 
                 this._context.Reviews.Add(review);
                 this._context.SaveChanges();
                 ViewBag.reviewCnt = reviews.Count + 1;
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ViewBag.reviewCnt = reviews.Count;
             }

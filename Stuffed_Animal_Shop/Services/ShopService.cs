@@ -53,12 +53,6 @@ namespace Stuffed_Animal_Shop.Services
             }
             if (pricesFiltered.Count > 0)
             {
-                
-                //productsByPrice = pricesFiltered.First().Equals(ALL) ?
-                //    _context.Products.Where(p => p != null).Distinct().ToList() :
-                //    _context.Products
-                //        .Where(product => pricesFiltered.Any(price => int.Parse(price) - 100 <= product.Price && product.Price < int.Parse(price)))
-                //        .ToList();
                 if (pricesFiltered.First().Equals(ALL))
                 {
                     productsByPrice = _context.Products.Where(p => p != null).Distinct().ToList();
@@ -88,7 +82,16 @@ namespace Stuffed_Animal_Shop.Services
                 }
                 else if (sort.Equals("best_rating"))
                 {
-                    productSort = _context.Reviews.OrderBy(r => r.Rating).Select(r => r.Product).ToList();
+                    List<Product> productsWithBestRating = _context.Reviews
+                        .OrderByDescending(r => r.Rating)
+                        .Select(r => r.Product)
+                        .Distinct()
+                        .ToList();
+
+                    productsFiltered = productsFiltered
+                        .Where(p => productsWithBestRating.Contains(p))
+                        .ToList();
+                    // productSort = _context.Reviews.OrderBy(r => r.Rating).Select(r => r.Product).ToList();
                 }
                 else if (sort.Equals("cheap"))
                 {
