@@ -10,6 +10,7 @@ namespace Stuffed_Animal_Shop.Services
         public List<Product> Products { get; set; }
         public int TotalPages { get; set; }
         public int CurrentPage { get; set; }
+        public string QueryString { get; set; }
     }
 
     public class ShopService
@@ -58,13 +59,15 @@ namespace Stuffed_Animal_Shop.Services
             int totalProducts = productsFiltered.Count();
             int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
             var products = productsFiltered.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
+            
+            string queryString = filter.ToQueryString();
 
             return new ProductResult
             {
                 Products = products,
                 TotalPages = totalPages,
-                CurrentPage = page
+                CurrentPage = page,
+                QueryString = queryString
             };
         }
 

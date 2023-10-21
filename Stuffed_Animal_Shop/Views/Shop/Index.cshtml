@@ -1,8 +1,13 @@
-﻿@model IEnumerable<Stuffed_Animal_Shop.Models.Product>
+﻿@using Stuffed_Animal_Shop.ViewModels.Filters;
+@model IEnumerable<Stuffed_Animal_Shop.Models.Product>
 
 @{
     ViewData["Title"] = "Shop";
     ViewData["Hero"] = "Shop";
+}
+
+@{
+    Filter filter = ViewBag.Filter;
 }
 
 <!-- Shop Start -->
@@ -16,27 +21,27 @@
                     <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="price-all" name="Prices" value="all">
+                            <input type="checkbox" class="custom-control-input" @(filter.Prices != null && filter.Prices.Contains("all") ? "checked" : null) id="price-all" name="Prices" value="all">
                             <label class="custom-control-label" for="price-all">All Price</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1" name="Prices" value="100">
+                            <input type="checkbox" class="custom-control-input" @(filter.Prices != null && filter.Prices.Contains("100") ? "checked" : null) id="price-1" name="Prices" value="100">
                             <label class="custom-control-label" for="price-1">$0 - $100</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2" name="Prices" value="200">
+                            <input type="checkbox" class="custom-control-input" @(filter.Prices != null && filter.Prices.Contains("200") ? "checked" : null) id="price-2" name="Prices" value="200">
                             <label class="custom-control-label" for="price-2">$100 - $200</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3" name="Prices" value="300">
+                            <input type="checkbox" class="custom-control-input" @(filter.Prices != null && filter.Prices.Contains("300") ? "checked" : null) id="price-3" name="Prices" value="300">
                             <label class="custom-control-label" for="price-3">$200 - $300</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-4" name="Prices" value="400">
+                            <input type="checkbox" class="custom-control-input" @(filter.Prices != null && filter.Prices.Contains("400") ? "checked" : null) id="price-4" name="Prices" value="400">
                             <label class="custom-control-label" for="price-4">$300 - $400</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="price-5" name="Prices" value="500">
+                            <input type="checkbox" class="custom-control-input" @(filter.Prices != null && filter.Prices.Contains("500") ? "checked" : null) id="price-5" name="Prices" value="500">
                             <label class="custom-control-label" for="price-5">$400 - $500</label>
                         </div>
                     </div>
@@ -47,35 +52,35 @@
                     <h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="color-all" name="Colors" value="all">
+                            <input type="checkbox" class="custom-control-input" @(filter.Colors != null && filter.Colors.Contains("all") ? "checked" : null) id="color-all" name="Colors" value="all">
                             <label class="custom-control-label" for="color-all">All Color</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-1" name="Colors" value="white">
+                            <input type="checkbox" class="custom-control-input" @(filter.Colors != null && filter.Colors.Contains("white") ? "checked" : null) id="color-1" name="Colors" value="white">
                             <label class="custom-control-label" for="color-1">White</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-2" name="Colors" value="red">
+                            <input type="checkbox" class="custom-control-input" @(filter.Colors != null && filter.Colors.Contains("red") ? "checked" : null) id="color-2" name="Colors" value="red">
                             <label class="custom-control-label" for="color-2">Red</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-3" name="Colors" value="green">
+                            <input type="checkbox" class="custom-control-input" @(filter.Colors != null && filter.Colors.Contains("green") ? "checked" : null) id="color-3" name="Colors" value="green">
                             <label class="custom-control-label" for="color-3">Green</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-4" name="Colors" value="blue">
+                            <input type="checkbox" class="custom-control-input" @(filter.Colors != null && filter.Colors.Contains("blue") ? "checked" : null) id="color-4" name="Colors" value="blue">
                             <label class="custom-control-label" for="color-4">Blue</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-5" name="Colors" value="yellow">
+                            <input type="checkbox" class="custom-control-input" @(filter.Colors != null && filter.Colors.Contains("yellow") ? "checked" : null) id="color-5" name="Colors" value="yellow">
                             <label class="custom-control-label" for="color-5">Yellow</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-6" name="Colors" value="purple">
+                            <input type="checkbox" class="custom-control-input" @(filter.Colors != null && filter.Colors.Contains("purple") ? "checked" : null) id="color-6" name="Colors" value="purple">
                             <label class="custom-control-label" for="color-6">Purple</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-7" name="Colors" value="orange">
+                            <input type="checkbox" class="custom-control-input" @(filter.Colors != null && filter.Colors.Contains("all") ? "orange" : null) id="color-7" name="Colors" value="orange">
                             <label class="custom-control-label" for="color-7">Orange</label>
                         </div>
                     </div>
@@ -86,27 +91,27 @@
                     <h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="size-all" name="Sizes" value="all">
+                            <input type="checkbox" class="custom-control-input" @(filter.Sizes != null && filter.Sizes.Contains("all") ? "checked" : null) id="size-all" name="Sizes" value="all">
                             <label class="custom-control-label" for="size-all">All Size</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-1" name="Sizes" value="SM">
+                            <input type="checkbox" class="custom-control-input" @(filter.Sizes != null && filter.Sizes.Contains("SM") ? "checked" : null) id="size-1" name="Sizes" value="SM">
                             <label class="custom-control-label" for="size-1">SM</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-2" name="Sizes" value="M">
+                            <input type="checkbox" class="custom-control-input" @(filter.Sizes != null && filter.Sizes.Contains("M") ? "checked" : null) id="size-2" name="Sizes" value="M">
                             <label class="custom-control-label" for="size-2">M</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-3" name="Sizes" value="L">
+                            <input type="checkbox" class="custom-control-input" @(filter.Sizes != null && filter.Sizes.Contains("L") ? "checked" : null) id="size-3" name="Sizes" value="L">
                             <label class="custom-control-label" for="size-3">L</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-4" name="Sizes" value="XL">
+                            <input type="checkbox" class="custom-control-input" @(filter.Sizes != null && filter.Sizes.Contains("XL") ? "checked" : null) id="size-4" name="Sizes" value="XL">
                             <label class="custom-control-label" for="size-4">XL</label>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="size-5" name="Sizes" value="XXL">
+                            <input type="checkbox" class="custom-control-input" @(filter.Sizes != null && filter.Sizes.Contains("XXL") ? "checked" : null) id="size-5" name="Sizes" value="XXL">
                             <label class="custom-control-label" for="size-5">XXL</label>
                         </div>
                     </div>
@@ -180,28 +185,30 @@
                             {
                                 @if (ViewBag.Page > 1)
                                 {
+                                    <span style="display: none;">@(filter.Page = 1);</span>
                                     <li class="page-item">
-                                        <a class="page-link" href="?page=1">First</a>
+                                        <a class="page-link" href="?@filter.ToQueryString()">First</a>
                                     </li>
                                 }
 
                                 @for (int i = Math.Max(1, ViewBag.Page - 2); i <= Math.Min(ViewBag.TotalPages, ViewBag.Page + 2); i++)
                                 {
+                                    <span style="display: none;">@(filter.Page = i);</span>
                                     <li class="page-item @(i == ViewBag.Page ? "active" : "")">
-                                        <a class="page-link" href="?page=@i">@i</a>
+                                        <a class="page-link" href="?@filter.ToQueryString()">@i</a>
                                     </li>
                                 }
 
                                 @if (ViewBag.Page < ViewBag.TotalPages)
                                 {
+                                    <span style="display: none;">@(filter.Page = ViewBag.TotalPages);</span>
                                     <li class="page-item">
-                                        <a class="page-link" href="?page=@ViewBag.TotalPages">Last</a>
+                                        <a class="page-link" href="?@filter.ToQueryString()">Last</a>
                                     </li>
                                 }
                             }
                         </ul>
                     </nav>
-
                 </div>
             </div>
         </div>

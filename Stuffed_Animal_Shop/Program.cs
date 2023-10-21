@@ -30,7 +30,7 @@ var serviceProvider = new ServiceCollection().AddDbContext<ApplicationDbContext>
 
 var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 var seedData = new SeedData(context);
-seedData.GenerateData(10, 40, 8, 9);  // Fake data
+/*seedData.GenerateData(10, 50, 8, 9);*/  // Fake data
 
 var app = builder.Build();
 

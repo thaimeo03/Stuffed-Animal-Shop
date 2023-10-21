@@ -44,6 +44,7 @@ namespace Stuffed_Animal_Shop.Controllers
             List<Product> productsFiltered = productResult.Products;
             ViewBag.TotalPages = productResult.TotalPages;
             ViewBag.Page = productResult.CurrentPage;
+            ViewBag.Filter = filter;
 
             return productsFiltered != null ?
                         View(productsFiltered) :
