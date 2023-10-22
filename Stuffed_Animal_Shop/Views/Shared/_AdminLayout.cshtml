@@ -28,16 +28,15 @@
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Navbar</a>
+			<a class="navbar-brand" href="/admin/orders" style="font-weight: 700; color: #D988B9;">Admin Page</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" href="/admin/products">Overview</a>
-					<a class="nav-link" href="/admin/shop">Categories</a>
-					<a class="nav-link active" href="/admin/products">Products</a>
-					<a class="nav-link" href="#">Analystic</a>
+					<a class="nav-link @(Context.Request.Path == "/admin/orders" ? "active" : "")" href="/admin/orders">Overview</a>
+					<a class="nav-link @(Context.Request.Path == "/admin/shop" ? "active" : "")" href="#!">Categories</a>
+					<a class="nav-link @(Context.Request.Path == "/admin/products" ? "active" : "")" href="/admin/products">Products</a>
 				</div>
 			</div>
 		</div>

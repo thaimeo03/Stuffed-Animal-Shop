@@ -3,19 +3,23 @@
 }
 @model IEnumerable<Stuffed_Animal_Shop.Models.Order>
 
+@{
+	List<User> users = ViewBag.Users;
+}
+
 <h1>Index</h1>
 
 <p>
 	<a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-	<thead>
+<table class="table ">
+	<thead class="thead-dark">
 		<tr>
 			<th>
 				@Html.DisplayNameFor(model => model.OrderId)
 			</th>
 			<th>
-				@Html.DisplayNameFor(model => model.User.UserId)
+				@Html.DisplayNameFor(model => model.User)
 			</th> 
 			<th>
 				@Html.DisplayNameFor(model => model.Status)
@@ -33,31 +37,40 @@
 		</tr>
 	</thead>
 	<tbody>
-@foreach (var item in Model) {
-		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.OrderId)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.User.UserId)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Status)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.CreatedAt)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.UpdatedAt)
-			</td>
-			<td>
-				<a class="nav-link">Detail</a>
-			</td>
-		</tr>
-		<tr class="contentforstuff">
+		@{
+			int cnt = 0;
+			foreach (var item in Model) {
+				<tr class="@(item.Status == "Delivered" ? "table-info" : "" )">
+					<td>
+						@Html.DisplayFor(modelItem => item.OrderId)
+					</td>
+					<td>
+						@{
+							if (users[cnt] != null)
+							{
+								@users[cnt].Email;
+							}
+						}
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Status)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.CreatedAt)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.UpdatedAt)
+					</td>
+					<td>
+						<a class="nav-link" style="color: hotpink" href="#!">Detail</a>
+					</td>
+				</tr>
+				<tr class="contentforstuff">
 
-		</tr>
-}	
+				</tr>
+				cnt++;			
+			}	
+		}
 	</tbody>
 </table>
 

@@ -17,7 +17,7 @@ namespace Stuffed_Animal_Shop.Data
             var users = GenerateFakeUserWithCart(userCount);
             var carts = GenerateFakeCart(userCount);
             var products = GenerateFakeProduct(productCount);
-            var categories = GenerateFakeCategory(productCount);
+            var categories = GenerateFakeCategory(userCount);
             var reviews = GenerateFakeReview(reviewCount);
             var orders = GenerateFakeOrder(orderCount, users);
             var images = GenerateFakeImage(productCount);
@@ -39,9 +39,14 @@ namespace Stuffed_Animal_Shop.Data
                 }
             }
 
-            for (int i = 0; i < productCount; i++)
+            for (int i = 0; i < userCount; i++)
             {
                 products[i].Categories = RandomListItem(categories);
+                categories[i].Products = RandomListItem(products);
+            }
+
+            for (int i = 0; i < productCount; i++)
+            {
                 images[i].Product = products[i];
 
                 var sizes = GenerateFakeSize(4);

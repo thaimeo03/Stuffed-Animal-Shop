@@ -2,7 +2,7 @@
 	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model IEnumerable<OrderItem>
-<tr>
+<tr style="border: 1px; border-color: red;" class="table-primary">
 	<td>
 		Name
 	</td>
@@ -21,7 +21,7 @@
 </tr>
 @foreach (var item in Model)
 {
-	<tr>
+	<tr class="table-success">
 		<td>
 			@Html.DisplayFor(modelItem => item.Name)
 		</td>

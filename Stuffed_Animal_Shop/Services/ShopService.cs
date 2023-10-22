@@ -31,6 +31,7 @@ namespace Stuffed_Animal_Shop.Services
             List<string> colorsFiltered = filter.Colors != null ? filter.Colors : new List<string>();
             List<string> pricesFiltered = filter.Prices != null ? filter.Prices.Select(price => price).ToList() : new List<string>();
             string name = filter.Name != null ? filter.Name : "";
+            string category = filter.Category != null ? filter.Category : "";
             int page = filter.Page != null ? filter.Page.Value : 1;
             int pageSize = filter.PageSize != null ? filter.PageSize.Value : 21;
             string sort = filter.Sort != null ? filter.Sort : "";
@@ -40,11 +41,18 @@ namespace Stuffed_Animal_Shop.Services
             List<Product> productsByPrice = new List<Product>();
             List<Product> productSort = new List<Product>();
             List<Product> productSearch = new List<Product>();
+            List<Product> productCategory = new List<Product>();
             List<Product> productsFiltered = _context.Products.ToList();
 
             if (name != "" && name != null)
             {
                 productSearch = _context.Products.Where(p => p.Name.Contains(name)).ToList();
+            }
+
+            if (category != "" && category != null)
+            {
+                Console.WriteLine(category);
+                productCategory = _context.Products.Where(p => p.Categories.Any(c => c.CategoryId.ToString() == category)).ToList();
             }
 
             if (sizesFiltered.Count > 0)
@@ -93,9 +101,13 @@ namespace Stuffed_Animal_Shop.Services
             {
                 productsFiltered = productsFiltered.Intersect(productSearch).ToList();
             }
+            if(filter.Category != null)
+            {
+                productsFiltered = productsFiltered.Intersect(productCategory).ToList();
+            }
 
-            // Sort product
-            if (!sort.Equals(string.Empty))
+                // Sort product
+                if (!sort.Equals(string.Empty))
             {
                 if (sort.Equals("latest"))
                 {
