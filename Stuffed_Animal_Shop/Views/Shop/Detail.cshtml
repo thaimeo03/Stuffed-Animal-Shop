@@ -1,5 +1,7 @@
-﻿@{
+﻿@using Stuffed_Animal_Shop.Models;
+@model Product;
 
+@{
     ViewData["Title"] = "Shop Detail";
     ViewData["HideHero"] = true;    
 }
@@ -10,8 +12,6 @@
     var images = ViewBag.Images as List<Image>;
 }
 
-@using Stuffed_Animal_Shop.ViewModels.Products;
-@model Product;
 
 <!-- Shop Detail Start -->
 <div class="container-fluid py-3">

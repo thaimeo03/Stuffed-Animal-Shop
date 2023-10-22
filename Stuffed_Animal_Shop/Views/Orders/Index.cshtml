@@ -3,10 +3,6 @@
 }
 @model IEnumerable<Stuffed_Animal_Shop.Models.Order>
 
-@{
-	List<User> users = ViewBag.Users;
-}
-
 <h1>Index</h1>
 
 <p>
@@ -38,19 +34,13 @@
 	</thead>
 	<tbody>
 		@{
-			int cnt = 0;
 			foreach (var item in Model) {
 				<tr class="@(item.Status == "Delivered" ? "table-info" : "" )">
 					<td>
 						@Html.DisplayFor(modelItem => item.OrderId)
 					</td>
 					<td>
-						@{
-							if (users[cnt] != null)
-							{
-								@users[cnt].Email;
-							}
-						}
+						@Html.DisplayFor(modelItem => item.User.Email)
 					</td>
 					<td>
 						@Html.DisplayFor(modelItem => item.Status)
@@ -67,8 +57,7 @@
 				</tr>
 				<tr class="contentforstuff">
 
-				</tr>
-				cnt++;			
+				</tr>	
 			}	
 		}
 	</tbody>
