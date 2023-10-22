@@ -9,113 +9,113 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Stuffed_Animal_Shop
 build_property.RootNamespace = Stuffed_Animal_Shop
-build_property.ProjectDir = D:\ASP\Testing\Stuffed_Animal_Shop\
+build_property.ProjectDir = E:\ASP.NET\Stuffed-animal-shop\Stuffed_Animal_Shop\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\ASP\Testing\Stuffed_Animal_Shop
+build_property.MSBuildProjectDirectory = E:\ASP.NET\Stuffed-animal-shop\Stuffed_Animal_Shop
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Cart/Index.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Home/Index.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Orders/Index.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Orders/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Orders/OrderDetailed.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Orders/OrderDetailed.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXE9yZGVyRGV0YWlsZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Products/Create.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Products/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Products/Delete.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Products/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Products/Edit.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Products/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Products/Index.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Products/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Profile/Index.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Profile/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/Components/AddToCart/AddToCart.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/Components/AddToCart/AddToCart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQWRkVG9DYXJ0XEFkZFRvQ2FydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/Components/Product/ProductsByRanking.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/Components/Product/ProductsByRanking.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUHJvZHVjdFxQcm9kdWN0c0J5UmFua2luZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/Components/Product/ProductsByTimeArrived.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/Components/Product/ProductsByTimeArrived.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUHJvZHVjdFxQcm9kdWN0c0J5VGltZUFycml2ZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/Components/Review/Review.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/Components/Review/Review.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmV2aWV3XFJldmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/Error.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/_AdminLayout.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/_AdminLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/_AuthLayout.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/_AuthLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BdXRoTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/_ShopLayout.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/_ShopLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaG9wTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/_ValidationScriptsPartial.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shop/Detail.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shop/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shop/Index.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shop/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Users/ForgotPassword.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Users/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRm9yZ290UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Users/Login.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Users/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Users/Register.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Users/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/_ViewImports.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/_ViewStart.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ASP/Testing/Stuffed_Animal_Shop/Views/Shared/_Layout.cshtml]
+[E:/ASP.NET/Stuffed-animal-shop/Stuffed_Animal_Shop/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-z15wyw7q1r

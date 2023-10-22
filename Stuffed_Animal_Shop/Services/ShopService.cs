@@ -2,6 +2,7 @@
 using Stuffed_Animal_Shop.Data;
 using Stuffed_Animal_Shop.Models;
 using Stuffed_Animal_Shop.ViewModels.Filters;
+using System.Reflection;
 
 namespace Stuffed_Animal_Shop.Services
 {
@@ -29,6 +30,7 @@ namespace Stuffed_Animal_Shop.Services
             List<string> sizesFiltered = filter.Sizes != null ? filter.Sizes : new List<string>();
             List<string> colorsFiltered = filter.Colors != null ? filter.Colors : new List<string>();
             List<string> pricesFiltered = filter.Prices != null ? filter.Prices.Select(price => price).ToList() : new List<string>();
+            string name = filter.Name != null ? filter.Name : "";
             int page = filter.Page != null ? filter.Page.Value : 1;
             int pageSize = filter.PageSize != null ? filter.PageSize.Value : 21;
             string sort = filter.Sort != null ? filter.Sort : "";
@@ -37,7 +39,13 @@ namespace Stuffed_Animal_Shop.Services
             List<Product> productsByColor = new List<Product>();
             List<Product> productsByPrice = new List<Product>();
             List<Product> productSort = new List<Product>();
+            List<Product> productSearch = new List<Product>();
             List<Product> productsFiltered = _context.Products.ToList();
+
+            if (name != "" && name != null)
+            {
+                productSearch = _context.Products.Where(p => p.Name.Contains(name)).ToList();
+            }
 
             if (sizesFiltered.Count > 0)
             {
@@ -59,18 +67,31 @@ namespace Stuffed_Animal_Shop.Services
                 }
                 else
                 {
-                    foreach (string price in pricesFiltered) {
+                    foreach (string price in pricesFiltered)
+                    {
                         productsByPrice.AddRange(_context.Products.Where(p => p.Price >= int.Parse(price) - 100 && p.Price < int.Parse(price)).ToList());
                     }
                 }
             }
 
-            
 
             // Get all duplicate products
-            if(!(filter.Prices == null && filter.Sizes == null && filter.Colors == null))
+
+            if (filter.Sizes != null)
             {
-                productsFiltered = productsBySize.Intersect(productsByColor).Intersect(productsByPrice).ToList();
+                productsFiltered = productsFiltered.Intersect(productsBySize).ToList();
+            }
+            if(filter.Colors != null)
+            {
+                productsFiltered = productsFiltered.Intersect(productsByColor).ToList();
+            }
+            if (filter.Prices != null)
+            {
+                productsFiltered = productsFiltered.Intersect(productsByPrice).ToList();
+            }
+            if(filter.Name != null)
+            {
+                productsFiltered = productsFiltered.Intersect(productSearch).ToList();
             }
 
             // Sort product

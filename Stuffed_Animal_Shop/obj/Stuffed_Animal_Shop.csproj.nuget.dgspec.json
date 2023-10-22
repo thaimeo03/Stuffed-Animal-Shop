@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ASP\\Testing\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {}
+    "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {}
   },
   "projects": {
-    "D:\\ASP\\Testing\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {
+    "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP\\Testing\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
+        "projectUniqueName": "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
         "projectName": "Stuffed_Animal_Shop",
-        "projectPath": "D:\\ASP\\Testing\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP\\Testing\\Stuffed_Animal_Shop\\obj\\",
+        "projectPath": "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\Stuffed_Animal_Shop.csproj",
+        "packagesPath": "C:\\Users\\thait\\.nuget\\packages\\",
+        "outputPath": "E:\\ASP.NET\\Stuffed-animal-shop\\Stuffed_Animal_Shop\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\thait\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -102,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

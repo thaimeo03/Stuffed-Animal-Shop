@@ -117,7 +117,9 @@
                     </div>
                 </div>
                 <!-- Size End -->
+
                 <input style="display: none;" name="Sort" value="@filter.Sort" />
+                <input style="display: none;" name="Name" value="@filter.Name" />
                 <!-- Action button Start -->
                 <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input type="submit" class="btn btn-primary" />
@@ -133,14 +135,14 @@
             <div class="row pb-3">
                 <div class="col-12 pb-1">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <form action="">
+                        <form method="get" asp-controller="Shop" asp-action="Index">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search by name">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary">
+                                <input type="text" class="form-control" name="Name" placeholder="Search by name">
+                                <button type="submit" class="input-group-append border-0 d-flex justify-content-center align-items-center">
+                                    <div  class="input-group-text bg-transparent text-primary">
                                         <i class="fa fa-search"></i>
-                                    </span>
-                                </div>
+                                    </div>
+                                </button>
                             </div>
                         </form>
                         <!-- Sort start -->

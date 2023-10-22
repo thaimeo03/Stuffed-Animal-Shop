@@ -15,7 +15,7 @@ namespace Stuffed_Animal_Shop.ViewModels.Filters
 
         public int? PageSize { get; set; } = null;
 
-        public int? Name { get; set; } = null;
+        public string? Name { get; set; } = null;
 
         public string? Sort { get; set; } = null;
 
@@ -38,7 +38,7 @@ namespace Stuffed_Animal_Shop.ViewModels.Filters
             if (PageSize.HasValue)
                 queryString.Add($"PageSize={PageSize}");
 
-            if (Name.HasValue)
+            if (Name != null)
                 queryString.Add($"Name={Name}");
 
             if (Sort != null)
