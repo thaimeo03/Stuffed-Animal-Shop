@@ -44,9 +44,14 @@ namespace Stuffed_Animal_Shop.Controllers
 				avatar: null
 			);
 
-			//this.ViewBag.Message = "Temp!";
+            if (user != null)
+            {
+                ViewBag.User = user;
+            }
 
-			return this.View(userEdit);
+            //this.ViewBag.Message = "Temp!";
+
+            return this.View(userEdit);
 		}
 
 		[Authorize(Roles = "Admin, User")]

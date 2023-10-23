@@ -153,7 +153,12 @@
                                             </div>
                                         </a>
                                         <div class="dropdown-menu position-absolute border-0 rounded-2 top-50 w-100 m-0" style="background: pink; transform: translateY(30%);">
-                                            <a href="/admin/orders" class="dropdown-item" style="color: black;">Admin Page</a>
+                                            @{
+                                                if(@ViewBag.User.Role == "Admin")
+                                                {
+                                                    <a href="/admin/orders" class="dropdown-item" style="color: black;">Admin Page</a>
+                                                }
+                                            }
                                             <a href="/profile/@ViewBag.User.UserId" class="dropdown-item" style="color: black;">Profile</a>
                                             <a asp-action="LogOut" asp-controller="Home" class="dropdown-item" style="color: black;">Log out</a>
                                         </div>
