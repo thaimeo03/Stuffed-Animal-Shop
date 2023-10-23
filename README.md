@@ -17,7 +17,7 @@ Stuffed Animal Shop là một dự án bài tập lớn môn lập trình web v�
   
 ## Công nghệ và công cụ ⚒️
 * Công nghệ sử dụng: ASP.core MVC 6, SQLSERVER, Entity Frame Work, Code Generation, ...
-* UI: template bootrap 5 tại https://themewagon.com/theme-price/free/
+* UI: template boostrap 5 tại https://themewagon.com/theme-price/free/
 ### Công cụ sử dụng:
 * Microsoft Visual Studio phiên bản 2022
 * Microsoft SQL Express
