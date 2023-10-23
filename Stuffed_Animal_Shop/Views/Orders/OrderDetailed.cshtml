@@ -18,6 +18,9 @@
 	<td>
 		ItemPrice
 	</td>
+	<td>
+		Actions
+	</td>
 </tr>
 @foreach (var item in Model)
 {
@@ -36,6 +39,9 @@
 		</td>
 		<td>
 			@Html.DisplayFor(modelItem => item.ItemPrice)
+		</td>
+		<td>
+			<a href="/shop/detail/@item.ProductId" class="nav-link" style="color: hotpink">Detail</a>
 		</td>
 	</tr>
 }	
