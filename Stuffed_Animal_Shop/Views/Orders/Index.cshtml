@@ -8,59 +8,55 @@
 <p>
 	<a asp-action="Create">Create New</a>
 </p>
-<table class="table ">
-	<thead class="thead-dark">
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.OrderId)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.User)
-			</th> 
-			<th>
-				@Html.DisplayNameFor(model => model.Status)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.CreatedAt)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.UpdatedAt)
-			</th>
-			<th>
-				Actions
-			</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@{
-			foreach (var item in Model) {
-				<tr class="@(item.Status == "Delivered" ? "table-info" : "" )">
-					<td>
-						@Html.DisplayFor(modelItem => item.OrderId)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.User.Email)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.Status)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.CreatedAt)
-					</td>
-					<td>
-						@Html.DisplayFor(modelItem => item.UpdatedAt)
-					</td>
-					<td>
-						<a class="nav-link" style="color: hotpink" href="#!">Detail</a>
-					</td>
-				</tr>
-				<tr class="contentforstuff">
-
-				</tr>	
-			}	
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.OrderId)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.User)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Status)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.CreatedAt)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.UpdatedAt)
+		</th>
+		<th>
+			Actions
+		</th>
+		<th></th>
+	</tr>
+	@{
+		foreach (var item in Model)
+		{
+			<tr class="@(item.Status == "Delivered" ? "table-info" : "" )">
+				<td>
+					@Html.DisplayFor(modelItem => item.OrderId)
+				</td>
+				<td>
+					@item.User.Email
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Status)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CreatedAt)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.UpdatedAt)
+				</td>
+				<td>
+					<a class="nav-link" style="color: hotpink" href="#!">Detail</a>
+				</td>
+			</tr>
+			<tr class="contentforstuff">
+			</tr>
 		}
-	</tbody>
+	}
 </table>
 
 @section Scripts {
@@ -72,17 +68,21 @@
 			var orderId = test.replace(/[^a-zA-Z0-9-]/g, "");
 			var test2 = $(this).parent().parent().next('.contentforstuff');
 
-			//alert(orderId);
+			var test3 = $(this).parent().parent();
 
-			//test2.html('<td>This is a hard-coded HTML element</td>');
+			// alert(orderId);
+
+			// test2.html('<td>This is a hard-coded HTML element</td>');
 
 			$.ajax({
 				url: '@Url.Action("GetTheStuff", "Orders")',
 				data: { yeaTheStuff: orderId },
 				success: function (response) {
-					//alert("ajax success!");
+					// alert("ajax success!");
 
-					test2.html(response);
+					$(response).insertAfter(test3);
+
+					// test2.html(response);
 				},
 				error: function (xhr, status, error) {
 					//alert(xhr.status + "\n" + xhr.statusText + "\n" + xhr.responseText);
