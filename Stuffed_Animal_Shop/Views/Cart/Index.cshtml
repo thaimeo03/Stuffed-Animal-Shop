@@ -23,9 +23,9 @@
                     <tr>
                         <th>Products</th>
                         <th>Price</th>
-                        <th>Quantity</th>
                         <th>Size</th>
                         <th>Color</th>
+                        <th>Quantity</th>
                         <th>Total</th>
                         <th>Remove</th>
                     </tr>
@@ -36,9 +36,9 @@
                         <tr>
                             <td class="align-middle"><img src="@cartItem.Image" alt="" style="width: 50px; margin-right: 12px;"> @cartItem.Name</td>
                             <td class="align-middle">$@cartItem.ItemPrice</td>
-                            <td class="align-middle">@cartItem.Count</td>
                             <td class="align-middle">@cartItem.Size</td>
-                            <td class="align-middle">@cartItem.Color</td>
+                            <td class="align-middle text-capitalize">@cartItem.Color</td>
+                            <td class="align-middle">@cartItem.Count</td>
                             <td class="align-middle" id="totalPrice">$@(cartItem.ItemPrice * cartItem.Count)</td>     
 
                             <td class="align-middle">

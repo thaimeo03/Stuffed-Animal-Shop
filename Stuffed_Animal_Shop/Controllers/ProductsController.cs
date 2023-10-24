@@ -187,7 +187,6 @@ namespace Stuffed_Animal_Shop.Controllers
                 // Update new prouct
                 _productService.UpdateProduct(product: productCurrent, editProduct: editProduct);
 
-
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

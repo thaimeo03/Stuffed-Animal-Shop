@@ -1,0 +1,212 @@
+﻿@model Stuffed_Animal_Shop.Models.Category
+
+@{
+    Layout = "_AdminLayout";
+}
+
+@{
+    ViewData["Title"] = "Details";
+    List<Product> productsInCategory = ViewBag.ProductsInCategory;
+    List<Product> productsNotInCategory = ViewBag.ProductsNotInCategory;
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.CategoryId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<form asp-controller="Categories" asp-action="ChangeProduct" class="mt-5">
+    <input type="hidden" name="CategoryId" value="@Model?.CategoryId" />
+    <button type="submit" class="btn btn-info mb-2 ml-auto d-block"> Save </button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Sold
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    MainImage
+                </th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product product in productsInCategory)
+            {
+                <tr>
+                    <td>
+                        @product.Name
+                    </td>
+                    <td>
+                        @product.Price
+                    </td>
+                    <td>
+                        @product.Quantity
+                    </td>
+                    <td>
+                        @product.Sold
+                    </td>
+                    <td>
+                        @product.Description
+                    </td>
+                    <td>
+                        <img src="@product.MainImage" class="w-100" style="object-fit: cover;" alt="">
+                    </td>
+                    <td class="w-100 h-100 d-flex justify-content-center align-items-center border-0">
+                        <div>
+                            <input type="checkbox" name="ProductIds" value="@product.ProductId" checked style="width: 18px; height: 18px;">
+                        </div>
+                    </td>
+                </tr>
+            }
+            @foreach (Product product in productsNotInCategory)
+            {
+                <tr>
+                    <td>
+                        @product.Name
+                    </td>
+                    <td>
+                        @product.Price
+                    </td>
+                    <td>
+                        @product.Quantity
+                    </td>
+                    <td>
+                        @product.Sold
+                    </td>
+                    <td>
+                        @product.Description
+                    </td>
+                    <td>
+                        <img src="@product.MainImage" class="w-100" style="object-fit: cover;" alt="">
+                    </td>
+                    <td class="w-100 h-100 d-flex justify-content-center align-items-center border-0">
+                        <div>
+                            <input type="checkbox" name="ProductIds" value="@product.ProductId" style="width: 18px; height: 18px;">
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+<form asp-controller="Categories" asp-action="ChangeProduct" class="mt-5">
+    <input type="hidden" name="CategoryId" value="@Model?.CategoryId" />
+    <button type="submit" class="btn btn-info mb-2 ml-auto d-block"> Save </button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Sold
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    MainImage
+                </th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product product in productsInCategory)
+            {
+                <tr>
+                    <td>
+                        @product.Name
+                    </td>
+                    <td>
+                        @product.Price
+                    </td>
+                    <td>
+                        @product.Quantity
+                    </td>
+                    <td>
+                        @product.Sold
+                    </td>
+                    <td>
+                        @product.Description
+                    </td>
+                    <td>
+                        <img src="@product.MainImage" class="w-100" style="object-fit: cover;" alt="">
+                    </td>
+                    <td class="w-100 h-100 d-flex justify-content-center align-items-center border-0">
+                        <div>
+                            <input type="checkbox" name="ProductIds" value="@product.ProductId" checked style="width: 18px; height: 18px;">
+                        </div>
+                    </td>
+                </tr>
+            }
+            @foreach (Product product in productsNotInCategory)
+            {
+                <tr>
+                    <td>
+                        @product.Name
+                    </td>
+                    <td>
+                        @product.Price
+                    </td>
+                    <td>
+                        @product.Quantity
+                    </td>
+                    <td>
+                        @product.Sold
+                    </td>
+                    <td>
+                        @product.Description
+                    </td>
+                    <td>
+                        <img src="@product.MainImage" class="w-100" style="object-fit: cover;" alt="">
+                    </td>
+                    <td class="w-100 h-100 d-flex justify-content-center align-items-center border-0">
+                        <div>
+                            <input type="checkbox" name="ProductIds" value="@product.ProductId" style="width: 18px; height: 18px;">
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

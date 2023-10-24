@@ -73,10 +73,7 @@ namespace Stuffed_Animal_Shop.Controllers
         [Route("/cart/delete-cartItem/{cartItemId}")]
         public async Task<IActionResult> DeleteCartItem([FromRoute] Guid cartItemId)
         {
-            var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
-            var user = this._userService.GetUserByEmail(userEmail);
-
-            var cartItem = _context.CartItems.FirstOrDefault(c => c.Cart.User == user && c.CartItemId == cartItemId);
+            var cartItem = _context.CartItems.FirstOrDefault(c => c.CartItemId == cartItemId);
 
             if( cartItem != null) {
                 _context.CartItems.Remove(cartItem);

@@ -35,7 +35,7 @@
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a class="nav-link @(Context.Request.Path == "/admin/orders" ? "active" : "")" href="/admin/orders">Overview</a>
-					<a class="nav-link @(Context.Request.Path == "/admin/shop" ? "active" : "")" href="#!">Categories</a>
+					<a class="nav-link @(Context.Request.Path == "/admin/shop" ? "active" : "")" href="/admin/categories">Categories</a>
 					<a class="nav-link @(Context.Request.Path == "/admin/products" ? "active" : "")" href="/admin/products">Products</a>
 					<a class="nav-link" href="/shop"> Return </a>
 				</div>

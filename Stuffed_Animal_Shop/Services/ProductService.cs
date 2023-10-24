@@ -60,6 +60,13 @@ namespace Stuffed_Animal_Shop.Services
                 _context.AddRange(listImagesProduct);
             }
 
+            // Remove old sizes and colors
+            var oldSizes = _context.Sizes.Where(s => s.Product.ProductId == product.ProductId);
+            var oldColors = _context.Colors.Where(c => c.Product.ProductId == product.ProductId);
+            _context.Sizes.RemoveRange(oldSizes);
+            _context.Colors.RemoveRange(oldColors);
+            _context.SaveChanges();
+
             var sizeList = new List<Size>();
             var colorList = new List<Color>();
 
@@ -87,8 +94,8 @@ namespace Stuffed_Animal_Shop.Services
             product.Quantity = editProduct.Quantity;
             product.MainImage = mainImageUrl;
 
-            _context.Sizes.UpdateRange(sizeList);
-            _context.Colors.UpdateRange(colorList);
+            _context.Sizes.AddRange(sizeList);
+            _context.Colors.AddRange(colorList);
             _context.Products.Update(product);
         }
     }
