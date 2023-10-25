@@ -50,6 +50,7 @@ namespace Stuffed_Animal_Shop.Migrations
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.CartItem", b =>
                 {
                     b.Property<Guid>("CartItemId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CartId")
@@ -73,6 +74,9 @@ namespace Stuffed_Animal_Shop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Size")
                         .IsRequired()
                         .HasColumnType("nvarchar(10)");
@@ -80,6 +84,8 @@ namespace Stuffed_Animal_Shop.Migrations
                     b.HasKey("CartItemId");
 
                     b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
                 });
@@ -382,8 +388,8 @@ namespace Stuffed_Animal_Shop.Migrations
                         .IsRequired();
 
                     b.HasOne("Stuffed_Animal_Shop.Models.Product", "Product")
-                        .WithOne("CartItem")
-                        .HasForeignKey("Stuffed_Animal_Shop.Models.CartItem", "CartItemId")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -456,12 +462,6 @@ namespace Stuffed_Animal_Shop.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Stuffed_Animal_Shop.Models.Product", b =>
-                {
-                    b.Navigation("CartItem")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Stuffed_Animal_Shop.Models.User", b =>

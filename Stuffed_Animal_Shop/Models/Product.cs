@@ -44,7 +44,6 @@ namespace Stuffed_Animal_Shop.Models
         [Column(TypeName = "datetime")]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        public virtual CartItem CartItem { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
 
     }

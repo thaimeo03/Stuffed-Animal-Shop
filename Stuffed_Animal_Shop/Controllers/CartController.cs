@@ -101,11 +101,9 @@ namespace Stuffed_Animal_Shop.Controllers
                 {
                     User = user,
                 };
+                List<Product> products = _context.Products.ToList();
                 foreach (var cartItem in cartItems)
                 {
-
-                    Product product = _context.Products.FirstOrDefault(p => p.CartItem == cartItem);
-
                     OrderItem orderItem = new OrderItem()
                     {
                         Name = cartItem.Name,
@@ -115,7 +113,7 @@ namespace Stuffed_Animal_Shop.Controllers
                         Size = cartItem.Size,
                         Image = cartItem.Image,
                         Order = currentOrder,
-                        ProductId = product.ProductId
+                        ProductId = cartItem.Product.ProductId
                     };
                     orderItems.Add(orderItem);
                 }

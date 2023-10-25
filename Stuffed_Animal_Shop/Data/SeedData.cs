@@ -143,7 +143,7 @@ namespace Stuffed_Animal_Shop.Data
             return carts;
         }
 
-            public List<Product> GenerateFakeProduct(int count)
+        public List<Product> GenerateFakeProduct(int count)
         {
             var products = new List<Product>();
             var productFaker = new Faker<Product>()

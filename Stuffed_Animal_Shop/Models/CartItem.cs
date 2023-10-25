@@ -8,7 +8,7 @@ namespace Stuffed_Animal_Shop.Models
     {
         [Key]
         [Column(TypeName = "uniqueidentifier")]
-        [ForeignKey("Product")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid CartItemId { get; set; }
 
         [Required]
@@ -38,6 +38,6 @@ namespace Stuffed_Animal_Shop.Models
 
         public Cart Cart { get; set; }
 
-        public virtual Product Product { get; set; }
+        public Product Product { get; set; }
     }
 }
