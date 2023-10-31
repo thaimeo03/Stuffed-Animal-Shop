@@ -42,27 +42,38 @@ namespace Stuffed_Animal_Shop.Controllers
         [Route("/cart/add-to-cart/{productId}")]
         public async Task<IActionResult> AddToCart([FromRoute] Guid productId, AddToCart addToCart)
         {
-            Console.WriteLine(addToCart.SizeItem + ' ' + addToCart.ColorItem + ' ' + addToCart.Count);
             if (ModelState.IsValid)
             {
                 var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
                 var user = this._userService.GetUserByEmail(userEmail);
                 var product = _context.Products.FirstOrDefault(p => p.ProductId == productId);
                 var currentCart = _context.Carts.FirstOrDefault(c => c.User == user);
-
-                var cartItem = new CartItem()
+                var existingCartItem = _context.CartItems.FirstOrDefault(p => p.Cart == currentCart
+                                                                               && p.Product == product
+                                                                               && p.Size == addToCart.SizeItem
+                                                                               && p.Color == addToCart.ColorItem);
+                if (existingCartItem != null)
                 {
-                    Cart = currentCart,
-                    Product = product,
-                    Name = product.Name,
-                    Count = int.Parse(addToCart.Count),
-                    Size = addToCart.SizeItem,
-                    Color = addToCart.ColorItem,
-                    ItemPrice = product.Price,
-                    Image = product.MainImage
-                };
 
-                _context.CartItems.Add(cartItem);
+                    existingCartItem.Count += int.Parse(addToCart.Count);
+                    _context.CartItems.Update(existingCartItem);
+                }
+                else
+                {
+                    var cartItem = new CartItem()
+                    {
+                        Cart = currentCart,
+                        Product = product,
+                        Name = product.Name,
+                        Count = int.Parse(addToCart.Count),
+                        Size = addToCart.SizeItem,
+                        Color = addToCart.ColorItem,
+                        ItemPrice = product.Price,
+                        Image = product.MainImage
+                    };
+
+                    _context.CartItems.Add(cartItem);
+                }
                 await _context.SaveChangesAsync();
             }
 
@@ -78,9 +89,7 @@ namespace Stuffed_Animal_Shop.Controllers
             if( cartItem != null) {
                 _context.CartItems.Remove(cartItem);
                 await _context.SaveChangesAsync();
-
             }
-
             return RedirectToAction("Index");
         }
 

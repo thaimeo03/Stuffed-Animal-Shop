@@ -23,12 +23,21 @@
         <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
         <div>
             @{
+                bool isFirstSize = true;
                 foreach (Size size in sizes)
                 {
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="@size.Name" name="SizeItem" value="@size.Name">
-                        <label class="custom-control-label" for="@size.Name">@size.Name</label>
+                        @if (isFirstSize)
+                        {
+                            <input type="radio" class="custom-control-input" checked id="@size.Name" name="SizeItem" value="@size.Name">
+                        }
+                        else
+                        {
+                            <input type="radio" class="custom-control-input" id="@size.Name" name="SizeItem" value="@size.Name">
+                        }
+                        <label class="custom-control-label text-capitalize" for="@size.Name">@size.Name</label>
                     </div>
+                    isFirstSize = false;
                 }
             }
         </div>
@@ -37,12 +46,21 @@
         <p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
         <div>
             @{
+                bool isFirstColor = true;
                 foreach (Color color in colors)
                 {
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="@color.Name" name="ColorItem" value="@color.Name">
+                        @if (isFirstColor)
+                        {
+                            <input type="radio" class="custom-control-input" checked id="@color.Name" name="ColorItem" value="@color.Name">
+                        }
+                        else
+                        {
+                            <input type="radio" class="custom-control-input" id="@color.Name" name="ColorItem" value="@color.Name">
+                        }
                         <label class="custom-control-label text-capitalize" for="@color.Name">@color.Name</label>
                     </div>
+                    isFirstColor = false;
                 }
             }
         </div>
